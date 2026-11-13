@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 intro: A question, a problem or an idea? Answers to frequently asked questions are below. Otherwise, write to me.
 contactHint: To help me answer, tell me your iPhone model, your iOS version and the app version. Please do not send health data by email.
 faq:
