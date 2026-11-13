@@ -40,14 +40,17 @@ Acalme is a night journal. The principle: log as little as possible, and let the
 
 1. **Log in one gesture.** An urge to move or bedtime is logged in one tap, from the app, a widget, Control Center or the Apple Watch.
 2. **Set it against sleep.** The app reads nights from the Health app and places the urges to move on them. A few taps add the day's factors and treatments.
-3. **See what stands out.** Over the weeks, the analysis shows what goes with calmer or more restless nights. When a difference is too small to be stated, the app says so.
+3. **See what stands out.** The analysis is concrete: it starts from everyday data, not impressions. Over the weeks, it shows what goes with calmer or more restless nights.
+4. **Share with your doctor.** The sleep diary exports as a PDF, to print or to show during an appointment.
 
 ## What the app does
 
-- Log an episode in a single gesture, from the app, a widget, Control Center or the Apple Watch.
-- Review a summary of each night: sleep stages, awakenings, detected get-ups.
-- Keep a journal of everyday factors and treatments.
-- Spot trends to share with your doctor. The app helps you observe; it does not replace medical advice.
+- A summary of each night: sleep duration and stages, awakenings, times out of bed, time to fall asleep.
+- A calendar that colours each night by how restless it was.
+- A manual mode, without an Apple Watch, to log bedtime and wake-up time yourself.
+- A short severity questionnaire, to retake from time to time and follow how things evolve.
+
+The app helps you observe. It makes no diagnosis and does not replace medical advice.
 
 ## My design choices
 

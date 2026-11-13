@@ -40,14 +40,17 @@ Acalme est un journal de nuit. Le principe : noter le moins possible, et laisser
 
 1. **Noter d'un geste.** Une impatience ou le coucher se notent en un tap, depuis l'app, un widget, le Centre de contrôle ou l'Apple Watch.
 2. **Croiser avec le sommeil.** L'app lit les nuits dans l'app Santé et y replace les impatiences. En quelques taps, on ajoute les facteurs de la journée et les traitements.
-3. **Voir ce qui ressort.** Au fil des semaines, l'analyse montre ce qui va avec des nuits plus calmes ou plus agitées. Quand un écart est trop faible pour être affirmé, l'app le dit.
+3. **Voir ce qui ressort.** L'analyse est concrète : elle part des données de tous les jours, pas d'impressions. Au fil des semaines, elle montre ce qui va avec des nuits plus calmes ou plus agitées.
+4. **Partager avec son médecin.** L'agenda de sommeil s'exporte en PDF, à imprimer ou à montrer en consultation.
 
 ## Ce que fait l'app
 
-- Noter une impatience en un geste, depuis l'app, un widget, le Centre de contrôle ou l'Apple Watch.
-- Retrouver le récapitulatif de chaque nuit : phases de sommeil, réveils, levers détectés.
-- Tenir un journal des facteurs du quotidien et des traitements.
-- Repérer des tendances à partager avec son médecin. L'app aide à observer, elle ne remplace pas un avis médical.
+- Un récapitulatif de chaque nuit : durée et phases de sommeil, réveils, levers, temps d'endormissement.
+- Un calendrier qui colore chaque nuit selon son agitation.
+- Un mode manuel, sans Apple Watch, pour noter soi-même ses heures de coucher et de réveil.
+- Un court questionnaire de sévérité, à refaire de temps en temps pour suivre l'évolution.
+
+L'app aide à observer. Elle ne pose pas de diagnostic et ne remplace pas un avis médical.
 
 ## Mes choix de conception
 
