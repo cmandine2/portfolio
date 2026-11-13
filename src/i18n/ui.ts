@@ -13,6 +13,18 @@ export const ui = {
     switchLanguage: "EN – English version of this page",
     placeholder: "Emplacement",
     nav: { projects: "Projets", contact: "Contact" },
+    draft: "Brouillon : cette page n'est pas encore publiée.",
+    support: {
+      label: "Support",
+      title: "Support {name}",
+      contactTitle: "Me contacter",
+      contactButton: "Écrire au support",
+      faqTitle: "Questions fréquentes",
+      compatibilityTitle: "Compatibilité",
+      seeAlso: "Voir aussi la",
+      privacyLink: "politique de confidentialité",
+      goToSupport: "Aller au support",
+    },
     home: {
       title: "Amandine Cousin — Apps iPhone et Apple Watch",
       description:
@@ -40,7 +52,6 @@ export const ui = {
       updated: "Dernière mise à jour",
       summaryTitle: "En bref",
       contents: "Sommaire",
-      draft: "Brouillon : cette page n'est pas encore publiée.",
     },
     status: {
       upcoming: "En préparation",
@@ -55,6 +66,18 @@ export const ui = {
     switchLanguage: "FR – Version française de cette page",
     placeholder: "Placeholder",
     nav: { projects: "Projects", contact: "Contact" },
+    draft: "Draft: this page is not published yet.",
+    support: {
+      label: "Support",
+      title: "{name} support",
+      contactTitle: "Contact me",
+      contactButton: "Email support",
+      faqTitle: "Frequently asked questions",
+      compatibilityTitle: "Compatibility",
+      seeAlso: "See also the",
+      privacyLink: "privacy policy",
+      goToSupport: "Go to support",
+    },
     home: {
       title: "Amandine Cousin — iPhone and Apple Watch apps",
       description:
@@ -82,7 +105,6 @@ export const ui = {
       updated: "Last updated",
       summaryTitle: "In short",
       contents: "Contents",
-      draft: "Draft: this page is not published yet.",
     },
     status: {
       upcoming: "Coming soon",

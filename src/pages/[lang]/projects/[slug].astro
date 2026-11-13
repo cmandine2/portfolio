@@ -7,6 +7,7 @@ import WaveEdge from "../../../components/WaveEdge.astro";
 import { contactEmail, languages, ui, type Lang } from "../../../i18n/ui";
 import {
   getPrivacyPages,
+  getSupportPages,
   getPublishedProjects,
   type Project,
 } from "../../../lib/projects";
@@ -15,13 +16,18 @@ export async function getStaticPaths() {
   const paths = [];
   for (const lang of languages) {
     const privacyPages = await getPrivacyPages(lang);
+    const supportPages = await getSupportPages(lang);
     for (const project of await getPublishedProjects(lang)) {
       const hasPrivacy = privacyPages.some(
         (page) => page.slug === project.slug,
       );
       paths.push({
         params: { lang, slug: project.slug },
-        props: { project, hasPrivacy },
+        props: {
+          project,
+          hasPrivacy,
+          hasSupport: supportPages.some((page) => page.slug === project.slug),
+        },
       });
     }
   }
@@ -31,11 +37,13 @@ export async function getStaticPaths() {
 interface Props {
   project: Project;
   hasPrivacy: boolean;
+  hasSupport: boolean;
 }
 
 const lang = Astro.params.lang as Lang;
 const t = ui[lang];
-const { project, hasPrivacy } = Astro.props;
+const { project, hasPrivacy, hasSupport } = Astro.props;
+const base = `/${lang}/projects/${project.slug}/`;
 const { title, summary, facts, images, icon } = project.entry.data;
 const cover = images[0];
 
@@ -101,14 +109,18 @@ const mailto = `mailto:${contactEmail}?subject=${encodeURIComponent(title)}`;
               ))}
             </dl>
           )}
-          {hasPrivacy && (
+          {(hasSupport || hasPrivacy) && (
             <p class="actions">
-              <a
-                class="pill"
-                href={`/${lang}/projects/${project.slug}/privacy/`}
-              >
-                {t.privacy.label}
-              </a>
+              {hasSupport && (
+                <a class="pill" href={`${base}support/`}>
+                  {t.support.label}
+                </a>
+              )}
+              {hasPrivacy && (
+                <a class="pill" href={`${base}privacy/`}>
+                  {t.privacy.label}
+                </a>
+              )}
             </p>
           )}
         </div>
@@ -181,9 +193,16 @@ const mailto = `mailto:${contactEmail}?subject=${encodeURIComponent(title)}`;
   <section class="container question" aria-labelledby="question">
     <div class="question-box on-saffron">
       <h2 id="question">{t.project.questionTitle}</h2>
-      <a class="button" href={mailto}>
-        {t.project.writeToMe}
-      </a>
+      <div class="question-actions">
+        {hasSupport && (
+          <a class="button" href={`${base}support/`}>
+            {t.support.goToSupport}
+          </a>
+        )}
+        <a class={hasSupport ? "text-link" : "button"} href={mailto}>
+          {t.project.writeToMe}
+        </a>
+      </div>
     </div>
   </section>
 </BaseLayout>
@@ -416,6 +435,22 @@ const mailto = `mailto:${contactEmail}?subject=${encodeURIComponent(title)}`;
     gap: 20px 32px;
     padding: clamp(24px, 4vw, 44px);
     border-radius: var(--radius);
+  }
+
+  .question-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px 20px;
+  }
+
+  .text-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 52px;
+    font-weight: 600;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 6px;
   }
 
   .question-box h2 {

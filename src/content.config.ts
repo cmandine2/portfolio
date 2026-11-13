@@ -53,4 +53,24 @@ const privacy = defineCollection({
   }),
 });
 
-export const collections = { projects, privacy };
+// Support page of an app:
+// src/content/projects/<slug>/support/fr.md and en.md (frontmatter only)
+const support = defineCollection({
+  loader: glob({
+    pattern: "*/support/{fr,en}.md",
+    base: "./src/content/projects",
+  }),
+  schema: z.object({
+    intro: z.string().min(1),
+    contactHint: z.string().min(1),
+    faq: z.array(
+      z.object({ question: z.string().min(1), answer: z.string().min(1) }),
+    ),
+    compatibility: z.array(z.string().min(1)).default([]),
+    note: z.string().min(1).optional(),
+    // While false, the page only exists in `npm run dev`.
+    published: z.boolean(),
+  }),
+});
+
+export const collections = { projects, privacy, support };
