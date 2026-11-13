@@ -12,8 +12,6 @@ facts:
     value: iPhone (iOS 18 ou ultérieur), Apple Watch en option (watchOS 10.6 ou ultérieur)
   - label: Langue
     value: Français
-  - label: Le nom
-    value: 'Un jeu de mots : Acalme se lit « accalmie » en français et « <span lang="en">a calm me</span> » en anglais.'
 images:
   - src: ./images/night.png
     alt: "Écran « Nuit agitée » : 6 h 30 de sommeil, 3 impatiences, et la frise des phases de sommeil"
@@ -25,6 +23,12 @@ images:
     alt: "Écran Analyse : barres montrant les facteurs liés à plus ou moins d'impatiences"
     caption: L'analyse des tendances
 ---
+
+## Pourquoi cette app
+
+Je vis avec le syndrome des jambes sans repos. Après avoir essayé beaucoup de traitements et de médecines douces sans réel résultat, j'ai voulu comprendre ce qui avait un impact sur mon sommeil et mes impatiences. J'ai donc créé Acalme, d'abord pour mes propres nuits.
+
+Son nom est un jeu de mots : Acalme se dit « accalmie » en français et « <span lang="en">a calm me</span> » en anglais.
 
 ## Le problème
 

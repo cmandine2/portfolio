@@ -104,7 +104,7 @@ const mailto = `mailto:${contactEmail}?subject=${encodeURIComponent(title)}`;
               {facts.map((fact) => (
                 <>
                   <dt>{fact.label}</dt>
-                  <dd set:html={fact.value} />
+                  <dd>{fact.value}</dd>
                 </>
               ))}
             </dl>

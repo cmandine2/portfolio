@@ -12,8 +12,6 @@ facts:
     value: iPhone (iOS 18 or later), optional Apple Watch (watchOS 10.6 or later)
   - label: Language
     value: French
-  - label: The name
-    value: 'A play on words: Acalme reads as “a calm me” in English and as “<span lang="fr">accalmie</span>” (a lull) in French.'
 images:
   - src: ./images/night.png
     alt: "Restless night screen, in French: 6 h 30 of sleep, 3 urges to move and the sleep stage timeline"
@@ -25,6 +23,12 @@ images:
     alt: "Analysis screen, in French: bars showing the factors linked to more or fewer urges to move"
     caption: The trend analysis
 ---
+
+## Why this app
+
+I live with restless legs syndrome. After trying many treatments and alternative therapies without real results, I wanted to understand what was affecting my sleep and my urges to move. So I built Acalme, first of all for my own nights.
+
+Its name is a play on words: Acalme sounds like “a calm me” in English and like “<span lang="fr">accalmie</span>” (a lull) in French.
 
 ## The problem
 
