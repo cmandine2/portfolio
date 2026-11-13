@@ -34,9 +34,13 @@ I live with restless legs syndrome. After trying many treatments and alternative
 
 Its name is a play on words: Acalme sounds like “a calm me” in English and like “<span lang="fr">accalmie</span>” (a lull) in French.
 
-## The problem
+## The solution
 
-Raw sleep data, from the Health app or the watch, is not enough to understand restless legs syndrome. It has to be set against what you actually lived through: the urges to move, the times you got up at night, treatments, factors from the day. And logging all this has to take a single gesture, in the middle of the night.
+Acalme is a night journal. The principle: log as little as possible, and let the app connect the rest.
+
+1. **Log in one gesture.** An urge to move or bedtime is logged in one tap, from the app, a widget, Control Center or the Apple Watch.
+2. **Set it against sleep.** The app reads nights from the Health app and places the urges to move on them. A few taps add the day's factors and treatments.
+3. **See what stands out.** Over the weeks, the analysis shows what goes with calmer or more restless nights. When a difference is too small to be stated, the app says so.
 
 ## What the app does
 

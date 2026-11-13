@@ -34,9 +34,13 @@ Je vis avec le syndrome des jambes sans repos. Après avoir essayé beaucoup de 
 
 Son nom est un jeu de mots : Acalme se dit « accalmie » en français et « <span lang="en">a calm me</span> » en anglais.
 
-## Le problème
+## La solution
 
-Les données de sommeil brutes, celles de l'app Santé ou de la montre, ne suffisent pas à comprendre le syndrome des jambes sans repos. Il faut les croiser avec le vécu : impatiences ressenties, levers nocturnes, traitements, facteurs de la journée. Et cette saisie doit tenir en un geste, au milieu de la nuit.
+Acalme est un journal de nuit. Le principe : noter le moins possible, et laisser l'app croiser le reste.
+
+1. **Noter d'un geste.** Une impatience ou le coucher se notent en un tap, depuis l'app, un widget, le Centre de contrôle ou l'Apple Watch.
+2. **Croiser avec le sommeil.** L'app lit les nuits dans l'app Santé et y replace les impatiences. En quelques taps, on ajoute les facteurs de la journée et les traitements.
+3. **Voir ce qui ressort.** Au fil des semaines, l'analyse montre ce qui va avec des nuits plus calmes ou plus agitées. Quand un écart est trop faible pour être affirmé, l'app le dit.
 
 ## Ce que fait l'app
 
