@@ -1,0 +1,213 @@
+---
+import AppPageHeader from "../../../../components/AppPageHeader.astro";
+import BaseLayout from "../../../../layouts/BaseLayout.astro";
+import { contactEmail, languages, ui, type Lang } from "../../../../i18n/ui";
+import {
+  getPrivacyPages,
+  getPublishedProjects,
+  getSupportPages,
+  type SupportPage,
+} from "../../../../lib/projects";
+
+export async function getStaticPaths() {
+  const paths = [];
+  for (const lang of languages) {
+    const projects = await getPublishedProjects(lang);
+    const privacyPages = await getPrivacyPages(lang);
+    for (const page of await getSupportPages(lang)) {
+      const project = projects.find((item) => item.slug === page.slug);
+      if (!project) continue;
+      paths.push({
+        params: { lang, slug: page.slug },
+        props: {
+          page,
+          appName: project.entry.data.title,
+          hasPrivacy: privacyPages.some((item) => item.slug === page.slug),
+        },
+      });
+    }
+  }
+  return paths;
+}
+
+interface Props {
+  page: SupportPage;
+  appName: string;
+  hasPrivacy: boolean;
+}
+
+const lang = Astro.params.lang as Lang;
+const t = ui[lang];
+const { page, appName, hasPrivacy } = Astro.props;
+const { intro, contactHint, faq, compatibility, note, published } =
+  page.entry.data;
+const base = `/${lang}/projects/${page.slug}/`;
+const title = t.support.title.replace("{name}", appName);
+const mailto = `mailto:${contactEmail}?subject=${encodeURIComponent(title)}`;
+---
+
+<BaseLayout lang={lang} title={title} description={intro}>
+  <AppPageHeader
+    lang={lang}
+    parentHref={base}
+    parentLabel={appName}
+    current={t.support.label}
+    title={title}
+  >
+    {intro}
+  </AppPageHeader>
+
+  <div class="container app-page">
+    {!published && <p class="draft-banner">{t.draft}</p>}
+
+    <section class="contact on-saffron" aria-labelledby="contact-title">
+      <div>
+        <h2 id="contact-title">{t.support.contactTitle}</h2>
+        <p>{contactHint}</p>
+      </div>
+      <a class="button" href={mailto}>
+        <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24">
+          <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+          <path d="M3 7l9 6 9-6"></path>
+        </svg>
+        {t.support.contactButton}
+      </a>
+    </section>
+
+    <section class="card card--featured" aria-labelledby="faq-title">
+      <h2 id="faq-title" class="section-title">
+        {t.support.faqTitle}
+      </h2>
+      <div class="faq">
+        {faq.map((item, index) => (
+          <details open={index === 0}>
+            <summary>{item.question}</summary>
+            <p>{item.answer}</p>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <section class="card" aria-labelledby="compatibility-title">
+      <h2 id="compatibility-title" class="small-title">
+        {t.support.compatibilityTitle}
+      </h2>
+      <ul class="tags">
+        {compatibility.map((item) => (
+          <li class="tag">{item}</li>
+        ))}
+      </ul>
+      {note && <p class="note">{note}</p>}
+      {hasPrivacy && (
+        <p class="note">
+          {t.support.seeAlso}{" "}
+          <a href={`${base}privacy/`}>{t.support.privacyLink}</a>.
+        </p>
+      )}
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .contact {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: clamp(24px, 4vw, 44px);
+    border-radius: var(--radius);
+  }
+
+  .contact div {
+    flex: 1 1 300px;
+    min-width: 0;
+  }
+
+  .contact h2 {
+    margin-bottom: 6px;
+    font-size: 26px;
+    font-weight: 700;
+  }
+
+  .contact p {
+    font-size: 17px;
+    font-weight: 500;
+  }
+
+  .contact svg {
+    flex: 0 0 auto;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .section-title {
+    margin-bottom: 8px;
+  }
+
+  details {
+    padding: 4px 0;
+    border-bottom: 2px solid var(--sand);
+  }
+
+  details:last-child {
+    border-bottom: 0;
+  }
+
+  summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    min-height: 56px;
+    padding-block: 8px;
+    font-weight: 600;
+    font-size: 19px;
+    line-height: 1.35;
+    color: var(--abyss);
+    cursor: pointer;
+    list-style: none;
+  }
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  summary::after {
+    content: "+";
+    flex: 0 0 auto;
+    font-size: 26px;
+    font-weight: 500;
+    line-height: 1;
+  }
+
+  details[open] summary::after {
+    content: "–";
+  }
+
+  details p {
+    margin-bottom: 18px;
+    color: var(--ink-soft);
+  }
+
+  .small-title {
+    margin-bottom: 10px;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 1.25;
+    color: var(--abyss);
+  }
+
+  .note {
+    margin-top: 20px;
+    font-size: 17px;
+    color: var(--ink-soft);
+  }
+
+  .note + .note {
+    margin-top: 10px;
+  }
+</style>

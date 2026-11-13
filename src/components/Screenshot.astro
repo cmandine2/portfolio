@@ -1,0 +1,72 @@
+---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+import { ui, type Lang } from "../i18n/ui";
+
+interface Props {
+  lang: Lang;
+  src?: ImageMetadata;
+  alt: string;
+  device?: "iphone" | "watch";
+  /** "frame" adds the thick phone border used in the round bubbles. */
+  variant?: "plain" | "frame";
+  sizes?: string;
+}
+
+const {
+  lang,
+  src,
+  alt,
+  device = "iphone",
+  variant = "plain",
+  sizes = "(min-width: 600px) 280px, 90vw",
+} = Astro.props;
+---
+
+{src ? (
+  <Image
+    class:list={["shot", device, variant]}
+    src={src}
+    alt={alt}
+    widths={[240, 480, 720]}
+    sizes={sizes}
+  />
+) : (
+  <div
+    class:list={["shot", "empty", device, variant]}
+    role="img"
+    aria-label={`${ui[lang].placeholder} : ${alt}`}
+  >
+    [Capture]
+  </div>
+)}
+
+<style>
+  .shot {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 9 / 19.5;
+    object-fit: cover;
+    background: var(--white);
+    border: 2px solid var(--abyss);
+    border-radius: 28px;
+  }
+
+  .shot.watch {
+    aspect-ratio: 1 / 1.22;
+    border-radius: 36px;
+  }
+
+  .shot.frame {
+    border: 6px solid var(--ink);
+    border-radius: 24px;
+  }
+
+  .empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--ink-soft);
+    font-size: 15px;
+  }
+</style>

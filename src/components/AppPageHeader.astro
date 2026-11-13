@@ -1,0 +1,65 @@
+---
+import WaveEdge from "./WaveEdge.astro";
+import { ui, type Lang } from "../i18n/ui";
+
+interface Props {
+  lang: Lang;
+  /** Project page this page belongs to. */
+  parentHref: string;
+  parentLabel: string;
+  current: string;
+  title: string;
+}
+
+const { lang, parentHref, parentLabel, current, title } = Astro.props;
+---
+
+<section class="on-lagoon">
+  <div class="container hero">
+    <nav class="breadcrumb" aria-label={ui[lang].breadcrumb}>
+      <a href={parentHref}>{parentLabel}</a>
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">{current}</span>
+    </nav>
+    <h1>{title}</h1>
+    <p class="lead">
+      <slot />
+    </p>
+  </div>
+</section>
+<WaveEdge />
+
+<style>
+  .hero {
+    padding-block: 40px 48px;
+  }
+
+  .breadcrumb {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0 8px;
+    margin-bottom: 28px;
+    font-size: 16px;
+  }
+
+  .breadcrumb a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+
+  h1 {
+    margin-bottom: 16px;
+    font-weight: 700;
+    font-size: clamp(32px, 5.5vw, 64px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+  }
+
+  .lead {
+    max-width: 52ch;
+    font-size: clamp(19px, 2.2vw, 23px);
+    line-height: 1.45;
+  }
+</style>

@@ -1,0 +1,461 @@
+---
+import { Image } from "astro:assets";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import Screenshot from "../../../components/Screenshot.astro";
+import TentacleDivider from "../../../components/TentacleDivider.astro";
+import WaveEdge from "../../../components/WaveEdge.astro";
+import { contactEmail, languages, ui, type Lang } from "../../../i18n/ui";
+import {
+  getPrivacyPages,
+  getSupportPages,
+  getPublishedProjects,
+  type Project,
+} from "../../../lib/projects";
+
+export async function getStaticPaths() {
+  const paths = [];
+  for (const lang of languages) {
+    const privacyPages = await getPrivacyPages(lang);
+    const supportPages = await getSupportPages(lang);
+    for (const project of await getPublishedProjects(lang)) {
+      const hasPrivacy = privacyPages.some(
+        (page) => page.slug === project.slug,
+      );
+      paths.push({
+        params: { lang, slug: project.slug },
+        props: {
+          project,
+          hasPrivacy,
+          hasSupport: supportPages.some((page) => page.slug === project.slug),
+        },
+      });
+    }
+  }
+  return paths;
+}
+
+interface Props {
+  project: Project;
+  hasPrivacy: boolean;
+  hasSupport: boolean;
+}
+
+const lang = Astro.params.lang as Lang;
+const t = ui[lang];
+const { project, hasPrivacy, hasSupport } = Astro.props;
+const base = `/${lang}/projects/${project.slug}/`;
+const { title, summary, facts, images, icon } = project.entry.data;
+const cover = images[0];
+
+// The Markdown body is cut at each "## heading": one card per section.
+const html = project.entry.rendered?.html ?? "";
+const sections = html.split(/(?=<h2[\s>])/).filter((part) => part.trim());
+const intro = sections.slice(0, 2);
+const rest = sections.slice(2);
+
+const mailto = `mailto:${contactEmail}?subject=${encodeURIComponent(title)}`;
+---
+
+<BaseLayout
+  lang={lang}
+  title={`${title} — ${t.project.titleSuffix} | Amandine Cousin`}
+  description={summary}
+>
+  <section class="on-lagoon">
+    <div class="container hero">
+      <nav class="breadcrumb" aria-label={t.breadcrumb}>
+        <a href={`/${lang}/#projects`}>{t.home.projectsTitle}</a>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page">{title}</span>
+      </nav>
+      <div class="hero-row">
+        <div class="hero-text">
+          <div class="title-row">
+            {icon && (
+              <Image
+                class="app-icon"
+                src={icon}
+                alt={t.project.iconAlt.replace("{name}", title)}
+                width={88}
+                height={88}
+                loading="eager"
+                densities={[1, 2, 3]}
+              />
+            )}
+            <h1>
+              <span class="underlined">
+                {title}
+                <svg
+                  aria-hidden="true"
+                  viewBox="0 0 320 40"
+                  preserveAspectRatio="none"
+                >
+                  <path
+                    d="M4 20 C 70 6, 130 30, 200 16 S 280 8, 298 20 c 10 7, 9 18, 0 18 c -6 0, -8 -6, -3 -9"
+                    vector-effect="non-scaling-stroke"
+                  ></path>
+                </svg>
+              </span>
+            </h1>
+          </div>
+          <p class="summary">{summary}</p>
+          {facts.length > 0 && (
+            <dl>
+              {facts.map((fact) => (
+                <>
+                  <dt>{fact.label}</dt>
+                  <dd>{fact.value}</dd>
+                </>
+              ))}
+            </dl>
+          )}
+          {(hasSupport || hasPrivacy) && (
+            <p class="actions">
+              {hasSupport && (
+                <a class="pill" href={`${base}support/`}>
+                  {t.support.label}
+                </a>
+              )}
+              {hasPrivacy && (
+                <a class="pill" href={`${base}privacy/`}>
+                  {t.privacy.label}
+                </a>
+              )}
+            </p>
+          )}
+        </div>
+        {cover && (
+          <div class="hero-visual">
+            <div class="bubble">
+              <div class="phone">
+                <Screenshot
+                  lang={lang}
+                  src={cover.src}
+                  alt={cover.alt}
+                  variant="frame"
+                  sizes="170px"
+                />
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  </section>
+  <WaveEdge />
+
+  {intro.length > 0 && (
+    <div class="container cards first">
+      {intro.map((section, index) => (
+        <section
+          class:list={["card", "prose", { "card--featured": index === 0 }]}
+          set:html={section}
+        />
+      ))}
+    </div>
+  )}
+
+  <div class="divider">
+    <TentacleDivider />
+  </div>
+
+  {images.length > 0 && (
+    <section class="container gallery" aria-labelledby="screenshots">
+      <h2 id="screenshots" class="section-title">
+        {t.project.screenshots}
+      </h2>
+      <ul>
+        {images.map((image) => (
+          <li>
+            <figure>
+              <Screenshot
+                lang={lang}
+                src={image.src}
+                alt={image.alt}
+                device={image.device}
+              />
+              {image.caption && <figcaption>{image.caption}</figcaption>}
+            </figure>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )}
+
+  {rest.length > 0 && (
+    <div class="container cards">
+      {rest.map((section) => (
+        <section class="card prose" set:html={section} />
+      ))}
+    </div>
+  )}
+
+  <section class="container question" aria-labelledby="question">
+    <div class="question-box on-saffron">
+      <h2 id="question">{t.project.questionTitle}</h2>
+      <div class="question-actions">
+        {hasSupport && (
+          <a class="button" href={`${base}support/`}>
+            {t.support.goToSupport}
+          </a>
+        )}
+        <a class={hasSupport ? "text-link" : "button"} href={mailto}>
+          {t.project.writeToMe}
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero {
+    padding-block: 40px 56px;
+  }
+
+  .breadcrumb {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0 8px;
+    margin-bottom: 28px;
+    font-size: 16px;
+  }
+
+  .breadcrumb a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+
+  .hero-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 40px 56px;
+  }
+
+  .hero-text {
+    flex: 999 1 480px;
+    min-width: 0;
+  }
+
+  .title-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16px 24px;
+    margin-bottom: 18px;
+  }
+
+  .app-icon {
+    flex: 0 0 auto;
+    width: clamp(56px, 9vw, 88px);
+    height: auto;
+    border: 2px solid var(--cream);
+    border-radius: 22.5%;
+  }
+
+  h1 {
+    min-width: 0;
+    font-weight: 700;
+    font-size: clamp(36px, 11.5vw, 84px);
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+
+  .underlined {
+    position: relative;
+    display: inline-block;
+    max-width: 100%;
+  }
+
+  .underlined svg {
+    position: absolute;
+    left: 0;
+    bottom: -0.2em;
+    width: 100%;
+    height: 0.3em;
+    overflow: visible;
+  }
+
+  .underlined path {
+    fill: none;
+    stroke: var(--saffron);
+    stroke-width: 7;
+    stroke-linecap: round;
+  }
+
+  .summary {
+    max-width: 40ch;
+    margin-bottom: 24px;
+    font-size: clamp(20px, 2.4vw, 25px);
+    line-height: 1.4;
+    font-weight: 500;
+  }
+
+  dl {
+    display: grid;
+    grid-template-columns: max-content minmax(0, 1fr);
+    gap: 6px 20px;
+    font-size: 17px;
+  }
+
+  dt {
+    font-weight: 600;
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 28px;
+  }
+
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 20px;
+    border: 2px solid var(--cream);
+    border-radius: 999px;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .pill:hover {
+    background: var(--cream);
+    color: var(--lagoon);
+  }
+
+  .hero-visual {
+    flex: 1 1 280px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .bubble {
+    width: min(100%, 360px);
+    aspect-ratio: 1 / 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--cream);
+    border-radius: 50%;
+  }
+
+  .phone {
+    width: 46%;
+    transform: rotate(-6deg);
+  }
+
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
+    gap: 32px;
+    padding-bottom: 72px;
+  }
+
+  .cards.first {
+    padding-block: 64px 24px;
+  }
+
+  .prose :global(h2) {
+    margin: 0 0 16px;
+    font-weight: 700;
+    font-size: clamp(26px, 3.4vw, 36px);
+    line-height: 1.15;
+    color: var(--abyss);
+  }
+
+  .prose :global(p),
+  .prose :global(ul),
+  .prose :global(ol) {
+    margin: 0;
+  }
+
+  .prose :global(* + p),
+  .prose :global(* + ul),
+  .prose :global(* + ol) {
+    margin-top: 12px;
+  }
+
+  .prose :global(h2 + *) {
+    margin-top: 0;
+  }
+
+  .prose :global(ul),
+  .prose :global(ol) {
+    padding-left: 22px;
+  }
+
+  .prose :global(li + li) {
+    margin-top: 10px;
+  }
+
+  .divider {
+    padding-block: 24px 48px;
+  }
+
+  .gallery {
+    padding-bottom: 72px;
+  }
+
+  .gallery h2 {
+    margin-bottom: 28px;
+  }
+
+  .gallery ul {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr));
+    gap: 28px;
+    padding: 0;
+    list-style: none;
+  }
+
+  figure {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  figcaption {
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  .question {
+    padding-bottom: 88px;
+  }
+
+  .question-box {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px 32px;
+    padding: clamp(24px, 4vw, 44px);
+    border-radius: var(--radius);
+  }
+
+  .question-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px 20px;
+  }
+
+  .text-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 52px;
+    font-weight: 600;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 6px;
+  }
+
+  .question-box h2 {
+    font-weight: 700;
+    font-size: clamp(26px, 3.6vw, 40px);
+    line-height: 1.1;
+  }
+</style>

@@ -25,6 +25,7 @@ pnpm-debug.log*
 
 # local assistant notes
 CLAUDE.md
+.claude/
 
 # local project documents
 docs/

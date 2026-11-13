@@ -1,0 +1,47 @@
+---
+// Decorative separator: a wavy line ending in a curled octopus arm.
+---
+
+<div class="container divider" aria-hidden="true">
+  <svg class="line" viewBox="0 0 1000 64" preserveAspectRatio="none">
+    <path
+      d="M0 32 C 125 8, 250 56, 375 32 S 625 8, 750 32 S 940 52, 1000 32"
+      vector-effect="non-scaling-stroke"
+    ></path>
+  </svg>
+  <svg class="curl" viewBox="0 0 60 64" width="45" height="48">
+    <path d="M0 32 C 18 22, 38 18, 46 32 C 52 44, 42 54, 32 50 C 25 47, 26 39, 32 38"></path>
+    <circle cx="40" cy="26" r="2"></circle>
+    <circle cx="47" cy="38" r="1.8"></circle>
+    <circle cx="41" cy="48" r="1.6"></circle>
+  </svg>
+</div>
+
+<style>
+  .divider {
+    display: flex;
+    align-items: center;
+  }
+
+  .line {
+    flex: 1 1 auto;
+    min-width: 0;
+    height: 48px;
+  }
+
+  .curl {
+    flex: 0 0 auto;
+    overflow: visible;
+  }
+
+  path {
+    fill: none;
+    stroke: var(--lagoon);
+    stroke-width: 3;
+    stroke-linecap: round;
+  }
+
+  circle {
+    fill: var(--saffron-dark);
+  }
+</style>

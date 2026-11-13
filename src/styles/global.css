@@ -1,0 +1,228 @@
+:root {
+  --cream: #fff6e6;
+  --lagoon: #146c78;
+  --abyss: #0e4a53;
+  --saffron: #f4a93b;
+  --saffron-dark: #c9771e;
+  --saffron-text: #9a5410;
+  --white: #ffffff;
+  --ink: #1a2e33;
+  --ink-soft: #3e5a5f;
+  --sand: #eadfcb;
+
+  --font: "Outfit", system-ui, sans-serif;
+  --page-width: 1200px;
+  --gutter: 28px;
+  --radius: 32px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-padding-top: 16px;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--font);
+  font-size: 18px;
+  line-height: 1.6;
+  overflow-wrap: break-word;
+}
+
+main {
+  flex-grow: 1;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+h1,
+h2,
+h3,
+p,
+ul,
+ol,
+dl,
+dd,
+figure {
+  margin: 0;
+}
+
+a {
+  color: var(--abyss);
+}
+
+a:hover {
+  color: var(--lagoon);
+}
+
+:focus-visible {
+  outline: 3px solid var(--abyss);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* Text on a lagoon background */
+.on-lagoon {
+  background: var(--lagoon);
+  color: var(--cream);
+}
+
+.on-lagoon a,
+.on-lagoon a:hover {
+  color: var(--cream);
+}
+
+.on-lagoon a:hover {
+  text-decoration-thickness: 3px;
+}
+
+.on-lagoon :focus-visible {
+  outline-color: var(--cream);
+}
+
+/* Text on a saffron background */
+.on-saffron {
+  background: var(--saffron);
+  color: var(--abyss);
+}
+
+.on-saffron a {
+  color: var(--abyss);
+}
+
+.on-saffron a:hover {
+  color: var(--ink);
+}
+
+.container {
+  width: 100%;
+  max-width: var(--page-width);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.card {
+  padding: clamp(24px, 4vw, 48px);
+  background: var(--white);
+  border: 2px solid var(--abyss);
+  border-radius: var(--radius);
+}
+
+.card--featured {
+  box-shadow: 6px 6px 0 var(--saffron);
+}
+
+.section-title {
+  font-weight: 700;
+  font-size: clamp(26px, 3.4vw, 36px);
+  line-height: 1.15;
+  color: var(--abyss);
+}
+
+.button,
+.on-saffron .button,
+.on-lagoon .button {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 52px;
+  padding: 0 26px;
+  background: var(--abyss);
+  color: var(--cream);
+  border-radius: 999px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.button:hover,
+.on-saffron .button:hover {
+  background: var(--lagoon);
+  color: var(--cream);
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 0;
+  list-style: none;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  padding: 0 14px;
+  border: 1.5px solid var(--abyss);
+  border-radius: 999px;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.tag--status {
+  border-color: transparent;
+  background: var(--cream);
+  color: var(--saffron-text);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  left: 12px;
+  top: -100px;
+  z-index: 10;
+  padding: 10px 16px;
+  background: var(--abyss);
+  color: var(--cream);
+  border-radius: 999px;
+  font-weight: 600;
+}
+
+.skip-link:focus {
+  top: 12px;
+  color: var(--cream);
+}
+
+/* Pages attached to an app: privacy, support */
+.app-page {
+  max-width: 920px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  padding-block: 56px 88px;
+}
+
+.draft-banner {
+  padding: 12px 20px;
+  border: 2px dashed var(--abyss);
+  border-radius: 16px;
+  font-weight: 600;
+  color: var(--abyss);
+}

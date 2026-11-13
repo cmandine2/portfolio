@@ -1,0 +1,57 @@
+---
+import { contactEmail, ui, type Lang } from "../i18n/ui";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = ui[lang];
+const year = new Date().getFullYear();
+---
+
+<footer class="on-lagoon">
+  <div class="container bar">
+    <img
+      src="/brand/lockup-on-dark.svg"
+      alt=""
+      width="1225"
+      height="323"
+      loading="lazy"
+    />
+    <nav aria-label={t.footerNav}>
+      <a href={`mailto:${contactEmail}`}>{contactEmail}</a>
+      <span>© {year} Amandine Cousin</span>
+    </nav>
+  </div>
+</footer>
+
+<style>
+  .bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px 24px;
+    padding-block: 24px;
+    font-size: 15px;
+  }
+
+  img {
+    width: 152px;
+    height: auto;
+  }
+
+  nav {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px 20px;
+  }
+
+  a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+</style>

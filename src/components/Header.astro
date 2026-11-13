@@ -1,0 +1,134 @@
+---
+import {
+  languages,
+  otherLang,
+  switchLangPath,
+  ui,
+  type Lang,
+} from "../i18n/ui";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = ui[lang];
+const other = otherLang(lang);
+---
+
+<header>
+  <div class="container bar">
+    <a class="brand" href={`/${lang}/`} aria-label={t.homeLink}>
+      <img src="/brand/octopus.svg" alt="" width="456" height="580" />
+      <span>Amandine Cousin</span>
+    </a>
+    <nav aria-label={t.mainNav}>
+      <a class="nav-link" href={`/${lang}/#projects`}>
+        {t.nav.projects}
+      </a>
+      <a class="nav-link" href={`/${lang}/#contact`}>
+        {t.nav.contact}
+      </a>
+      <span class="switch">
+        {languages.map((code) =>
+          code === lang ? (
+            <span class="switch-item current" aria-current="true">
+              {code.toUpperCase()}
+            </span>
+          ) : (
+            <a
+              class="switch-item"
+              href={switchLangPath(Astro.url.pathname, other)}
+              lang={other}
+              hreflang={other}
+              aria-label={t.switchLanguage}
+            >
+              {code.toUpperCase()}
+            </a>
+          ),
+        )}
+      </span>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px 24px;
+    padding-block: 16px;
+  }
+
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 44px;
+    color: var(--lagoon);
+    font-weight: 600;
+    font-size: 23px;
+    letter-spacing: -0.01em;
+    text-decoration: none;
+  }
+
+  .brand img {
+    width: auto;
+    height: 46px;
+  }
+
+  nav {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0 20px;
+    font-weight: 600;
+  }
+
+  .nav-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  .nav-link:hover {
+    color: var(--abyss);
+    text-decoration: underline;
+    text-underline-offset: 6px;
+  }
+
+  .switch {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px;
+    border: 2px solid var(--abyss);
+    border-radius: 999px;
+  }
+
+  .switch-item {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 44px;
+    min-height: 36px;
+    border-radius: 999px;
+    font-size: 15px;
+    color: var(--abyss);
+    text-decoration: none;
+  }
+
+  a.switch-item:hover {
+    background: var(--sand);
+    color: var(--abyss);
+  }
+
+  .switch-item.current {
+    background: var(--abyss);
+    color: var(--cream);
+  }
+</style>

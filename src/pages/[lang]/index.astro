@@ -1,0 +1,204 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ProjectCard from "../../components/ProjectCard.astro";
+import TentacleDivider from "../../components/TentacleDivider.astro";
+import WaveEdge from "../../components/WaveEdge.astro";
+import { contactEmail, languages, ui, type Lang } from "../../i18n/ui";
+import { getPublishedProjects } from "../../lib/projects";
+
+export function getStaticPaths() {
+  return languages.map((lang) => ({ params: { lang } }));
+}
+
+const lang = Astro.params.lang as Lang;
+const t = ui[lang].home;
+// Every published project gets a card here, so each one is linked from home.
+const projects = await getPublishedProjects(lang);
+---
+
+<BaseLayout lang={lang} title={t.title} description={t.description}>
+  <section class="on-lagoon">
+    <div class="container hero">
+      <div class="hero-text">
+        <p class="greeting">{t.greeting}</p>
+        <h1>
+          <img
+            src="/brand/wordmark-on-dark.svg"
+            alt="Amandine Cousin — Des idées plein la tech"
+            width="948"
+            height="210"
+          />
+        </h1>
+        <p class="lead">{t.lead}</p>
+        <p class="intro">{t.intro}</p>
+      </div>
+      <div class="hero-visual">
+        <div class="bubble">
+          <img src="/brand/octopus.svg" alt="" width="456" height="580" />
+        </div>
+      </div>
+    </div>
+  </section>
+  <WaveEdge />
+
+  <section id="projects" aria-labelledby="projects-title">
+    <div class="container projects">
+      <h2 id="projects-title">{t.projectsTitle}</h2>
+      <div class="project-list">
+        {projects.map((project) => (
+          <ProjectCard project={project} lang={lang} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <div class="divider">
+    <TentacleDivider />
+  </div>
+
+  <section id="contact" aria-labelledby="contact-title">
+    <div class="container contact">
+      <div class="contact-box on-saffron">
+        <h2 id="contact-title">{t.contactTitle}</h2>
+        <p>
+          <span>{t.contactLead}</span>
+          <svg aria-hidden="true" width="56" height="28" viewBox="0 0 56 28">
+            <path d="M2 14 C 14 2, 26 26, 40 12 C 44 8, 50 10, 52 14 M46 8 l6 6 -7 4"></path>
+          </svg>
+          <a href={`mailto:${contactEmail}`}>{contactEmail}</a>
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 40px 48px;
+    padding-block: 56px 64px;
+  }
+
+  .hero-text {
+    flex: 999 1 520px;
+    min-width: 0;
+  }
+
+  .greeting {
+    margin-bottom: 14px;
+    font-size: clamp(22px, 2.6vw, 28px);
+    font-weight: 500;
+  }
+
+  h1 {
+    margin-bottom: 36px;
+  }
+
+  h1 img {
+    width: min(100%, 620px);
+    height: auto;
+  }
+
+  .lead {
+    max-width: 32ch;
+    margin-bottom: 14px;
+    font-size: clamp(21px, 2.5vw, 27px);
+    line-height: 1.4;
+    font-weight: 500;
+  }
+
+  .intro {
+    max-width: 44ch;
+  }
+
+  .hero-visual {
+    flex: 1 1 260px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .bubble {
+    width: min(100%, 320px);
+    aspect-ratio: 1 / 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--cream);
+    border-radius: 50%;
+  }
+
+  .bubble img {
+    width: 56%;
+    height: auto;
+    transform: rotate(8deg);
+  }
+
+  .projects {
+    padding-block: 72px 40px;
+  }
+
+  h2 {
+    font-weight: 700;
+    line-height: 1.1;
+  }
+
+  #projects-title {
+    margin-bottom: 32px;
+    font-size: clamp(28px, 3.6vw, 40px);
+    color: var(--abyss);
+  }
+
+  .project-list {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .divider {
+    padding-block: 40px 64px;
+  }
+
+  .contact {
+    padding-bottom: 88px;
+  }
+
+  .contact-box {
+    padding: clamp(28px, 5vw, 56px);
+    border-radius: var(--radius);
+  }
+
+  #contact-title {
+    max-width: 20ch;
+    margin-bottom: 16px;
+    font-size: clamp(30px, 4.5vw, 52px);
+    line-height: 1.05;
+    letter-spacing: -0.015em;
+  }
+
+  .contact-box p {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px 14px;
+    font-size: clamp(19px, 2.4vw, 26px);
+    font-weight: 600;
+  }
+
+  .contact-box svg {
+    fill: none;
+    stroke: var(--abyss);
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .contact-box a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 48px;
+    text-decoration-thickness: 3px;
+    text-underline-offset: 7px;
+  }
+</style>

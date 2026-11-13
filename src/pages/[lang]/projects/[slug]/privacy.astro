@@ -1,0 +1,188 @@
+---
+import { render } from "astro:content";
+import BaseLayout from "../../../../layouts/BaseLayout.astro";
+import AppPageHeader from "../../../../components/AppPageHeader.astro";
+import { languages, ui, type Lang } from "../../../../i18n/ui";
+import {
+  getPrivacyPages,
+  getPublishedProjects,
+  type PrivacyPage,
+} from "../../../../lib/projects";
+
+export async function getStaticPaths() {
+  const paths = [];
+  for (const lang of languages) {
+    const projects = await getPublishedProjects(lang);
+    for (const page of await getPrivacyPages(lang)) {
+      const project = projects.find((item) => item.slug === page.slug);
+      if (!project) continue;
+      paths.push({
+        params: { lang, slug: page.slug },
+        props: { page, appName: project.entry.data.title },
+      });
+    }
+  }
+  return paths;
+}
+
+interface Props {
+  page: PrivacyPage;
+  appName: string;
+}
+
+const lang = Astro.params.lang as Lang;
+const t = ui[lang];
+const { page, appName } = Astro.props;
+const { summary, updated, published } = page.entry.data;
+const { Content, headings } = await render(page.entry);
+const contents = headings.filter((heading) => heading.depth === 2);
+const updatedText =
+  updated &&
+  new Intl.DateTimeFormat(lang, { dateStyle: "long" }).format(updated);
+---
+
+<BaseLayout
+  lang={lang}
+  title={`${appName} — ${t.privacy.title}`}
+  description={`${t.privacy.title} — ${t.privacy.app} ${appName}`}
+>
+  <AppPageHeader
+    lang={lang}
+    parentHref={`/${lang}/projects/${page.slug}/`}
+    parentLabel={appName}
+    current={t.privacy.label}
+    title={t.privacy.title}
+  >
+    {`${t.privacy.app} ${appName} `}
+    {updatedText && (
+      <>
+        · {t.privacy.updated}
+        {lang === "fr" ? " : " : ": "}
+        <time datetime={updated?.toISOString().slice(0, 10)}>
+          {updatedText}
+        </time>
+      </>
+    )}
+  </AppPageHeader>
+
+  <div class="container app-page">
+    {!published && <p class="draft-banner">{t.draft}</p>}
+    {summary.length > 0 && (
+      <section class="summary on-saffron" aria-labelledby="summary-title">
+        <h2 id="summary-title">{t.privacy.summaryTitle}</h2>
+        <ul>
+          {summary.map((line) => (
+            <li>{line}</li>
+          ))}
+        </ul>
+      </section>
+    )}
+    <nav class="contents" aria-labelledby="contents-title">
+      <h2 id="contents-title">{t.privacy.contents}</h2>
+      <ol>
+        {contents.map((heading) => (
+          <li>
+            <a href={`#${heading.slug}`}>{heading.text}</a>
+          </li>
+        ))}
+      </ol>
+    </nav>
+    <div class="card prose">
+      <Content />
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .summary {
+    padding: clamp(24px, 4vw, 44px);
+    border-radius: var(--radius);
+  }
+
+  .summary h2 {
+    margin-bottom: 8px;
+    font-size: 24px;
+    font-weight: 700;
+  }
+
+  .summary ul {
+    padding-left: 22px;
+    font-size: 19px;
+    font-weight: 500;
+  }
+
+  .summary li + li {
+    margin-top: 6px;
+  }
+
+  .contents {
+    padding: 24px 28px;
+    border: 2px solid var(--abyss);
+    border-radius: 24px;
+  }
+
+  .contents h2 {
+    margin-bottom: 8px;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--abyss);
+  }
+
+  .contents ol {
+    padding-left: 22px;
+    columns: 2 260px;
+    column-gap: 32px;
+  }
+
+  .contents a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 36px;
+  }
+
+  .prose {
+    counter-reset: section;
+  }
+
+  .prose :global(h2) {
+    counter-increment: section;
+    margin: 32px 0 10px;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 1.25;
+    color: var(--abyss);
+  }
+
+  .prose :global(h2::before) {
+    content: counter(section) ". ";
+  }
+
+  .prose :global(h2:first-child) {
+    margin-top: 0;
+  }
+
+  .prose :global(p),
+  .prose :global(ul),
+  .prose :global(ol) {
+    margin: 0;
+  }
+
+  .prose :global(* + p),
+  .prose :global(* + ul),
+  .prose :global(* + ol) {
+    margin-top: 12px;
+  }
+
+  .prose :global(h2 + *) {
+    margin-top: 0;
+  }
+
+  .prose :global(ul),
+  .prose :global(ol) {
+    padding-left: 22px;
+  }
+
+  .prose :global(li + li) {
+    margin-top: 6px;
+  }
+</style>
