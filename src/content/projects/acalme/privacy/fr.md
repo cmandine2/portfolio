@@ -11,7 +11,7 @@ summary:
 
 ## Qui est responsable
 
-SleepMonitor (iPhone, Apple Watch et widgets) est éditée par Amandine Cousin, qui vit avec le syndrome des jambes sans repos (SJSR) et a créé l'app pour ses propres nuits. Contact : [contact@amandinecousin.com](mailto:contact@amandinecousin.com).
+Acalme (iPhone, Apple Watch et widgets) est éditée par Amandine Cousin, qui vit avec le syndrome des jambes sans repos (SJSR) et a créé l'app pour ses propres nuits. Contact : [contact@amandinecousin.com](mailto:contact@amandinecousin.com).
 
 Comme je n'ai accès à aucune de tes données (voir plus bas), je ne les « collecte » pas au sens de la réglementation : elles sont traitées sur ton appareil, sous ton contrôle.
 
@@ -61,7 +61,7 @@ Je ne vends, ne loue et ne partage tes données avec personne. L'app ne contient
 
 ## Durée de conservation et suppression
 
-Tes données sont conservées tant que tu les gardes dans l'app. Tu peux supprimer des saisies dans l'app. Désinstaller l'app supprime les données locales de l'appareil. Si tu avais activé la sauvegarde iCloud, la copie reste dans ton iCloud jusqu'à ce que tu la supprimes : Réglages iOS › ton nom › iCloud › Gérer le stockage › SleepMonitor.
+Tes données sont conservées tant que tu les gardes dans l'app. Tu peux supprimer des saisies dans l'app. Désinstaller l'app supprime les données locales de l'appareil. Si tu avais activé la sauvegarde iCloud, la copie reste dans ton iCloud jusqu'à ce que tu la supprimes : Réglages iOS › ton nom › iCloud › Gérer le stockage › Acalme.
 
 ## Tes droits
 
@@ -69,7 +69,7 @@ Conformément au RGPD, tu disposes d'un droit d'accès, de rectification, d'effa
 
 ## Ce n'est pas un dispositif médical
 
-SleepMonitor t'aide à observer et à documenter tes nuits. Elle ne pose aucun diagnostic, ne recommande aucun traitement et ne remplace pas l'avis d'un professionnel de santé. Parle à ton médecin avant toute décision médicale.
+Acalme t'aide à observer et à documenter tes nuits. Elle ne pose aucun diagnostic, ne recommande aucun traitement et ne remplace pas l'avis d'un professionnel de santé. Parle à ton médecin avant toute décision médicale.
 
 ## Modifications
 

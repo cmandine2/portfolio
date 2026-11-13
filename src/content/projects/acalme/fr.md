@@ -1,5 +1,5 @@
 ---
-title: SleepMonitor
+title: Acalme
 summary: Pour comprendre ses nuits quand on vit avec le syndrome des jambes sans repos.
 published: true
 status: upcoming

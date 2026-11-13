@@ -11,7 +11,7 @@ summary:
 
 ## Who is responsible
 
-SleepMonitor (iPhone, Apple Watch and widgets) is published by Amandine Cousin, who lives with restless legs syndrome (RLS) and built the app for her own nights. Contact: [contact@amandinecousin.com](mailto:contact@amandinecousin.com).
+Acalme (iPhone, Apple Watch and widgets) is published by Amandine Cousin, who lives with restless legs syndrome (RLS) and built the app for her own nights. Contact: [contact@amandinecousin.com](mailto:contact@amandinecousin.com).
 
 Since I have no access to any of your data (see below), I do not "collect" it in the regulatory sense: it is processed on your device, under your control.
 
@@ -61,7 +61,7 @@ I do not sell, rent or share your data with anyone. The app contains no analytic
 
 ## Retention and deletion
 
-Your data is kept for as long as you keep it in the app. You can delete entries in the app. Uninstalling the app deletes the local data from the device. If you had turned on the iCloud backup, the copy stays in your iCloud until you delete it: iOS Settings › your name › iCloud › Manage Storage › SleepMonitor.
+Your data is kept for as long as you keep it in the app. You can delete entries in the app. Uninstalling the app deletes the local data from the device. If you had turned on the iCloud backup, the copy stays in your iCloud until you delete it: iOS Settings › your name › iCloud › Manage Storage › Acalme.
 
 ## Your rights
 
@@ -69,7 +69,7 @@ Under the GDPR, you have the right to access, rectify, erase, port, restrict and
 
 ## Not a medical device
 
-SleepMonitor helps you observe and document your nights. It makes no diagnosis, recommends no treatment and does not replace the advice of a healthcare professional. Talk to your doctor before any medical decision.
+Acalme helps you observe and document your nights. It makes no diagnosis, recommends no treatment and does not replace the advice of a healthcare professional. Talk to your doctor before any medical decision.
 
 ## Changes
 
