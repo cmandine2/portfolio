@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 updated: 2026-11-13
 summary:
   - Your data stays on your iPhone. I have no server, no accounts, and no access to your journal.

@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 updated: 2026-11-13
 summary:
   - Tes données restent sur ton iPhone. Je n'ai aucun serveur, aucun compte, aucun accès à ton journal.
