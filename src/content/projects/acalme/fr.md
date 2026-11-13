@@ -3,6 +3,7 @@ title: Acalme
 summary: Pour comprendre ses nuits quand on vit avec le syndrome des jambes sans repos.
 published: true
 status: upcoming
+icon: ./images/icon.png
 platforms:
   - iPhone
   - Apple Watch

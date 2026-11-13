@@ -32,6 +32,8 @@ const projects = defineCollection({
         .array(z.object({ label: z.string().min(1), url: z.url() }))
         .default([]),
       appStoreUrl: z.url().optional(),
+      // App icon, shown next to the project name.
+      icon: image().optional(),
     }),
 });
 

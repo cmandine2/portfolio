@@ -3,6 +3,7 @@ title: Acalme
 summary: To make sense of your nights when you live with restless legs syndrome.
 published: true
 status: upcoming
+icon: ./images/icon.png
 platforms:
   - iPhone
   - Apple Watch

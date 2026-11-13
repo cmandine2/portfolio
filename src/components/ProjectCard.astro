@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import Screenshot from "./Screenshot.astro";
 import { ui, type Lang } from "../i18n/ui";
 import type { Project } from "../lib/projects";
@@ -10,7 +11,7 @@ interface Props {
 
 const { project, lang } = Astro.props;
 const t = ui[lang];
-const { title, summary, platforms, status, images } = project.entry.data;
+const { title, summary, platforms, status, images, icon } = project.entry.data;
 const cover = images[0];
 ---
 
@@ -31,7 +32,19 @@ const cover = images[0];
     </div>
   </div>
   <div class="text">
-    <h3>{title}</h3>
+    <div class="title-row">
+      {icon && (
+        <Image
+          class="app-icon"
+          src={icon}
+          alt={t.project.iconAlt.replace("{name}", title)}
+          width={64}
+          height={64}
+          densities={[1, 2, 3]}
+        />
+      )}
+      <h3>{title}</h3>
+    </div>
     <p class="summary">{summary}</p>
     <ul class="tags">
       {platforms.map((platform) => (
@@ -85,8 +98,23 @@ const cover = images[0];
     min-width: 0;
   }
 
-  h3 {
+  .title-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px 16px;
     margin-bottom: 12px;
+  }
+
+  .app-icon {
+    flex: 0 0 auto;
+    width: clamp(48px, 8vw, 64px);
+    height: auto;
+    border-radius: 22.5%;
+  }
+
+  h3 {
+    min-width: 0;
     font-weight: 700;
     font-size: clamp(28px, 9vw, 60px);
     line-height: 1;

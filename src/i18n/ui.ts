@@ -28,6 +28,7 @@ export const ui = {
     },
     project: {
       titleSuffix: "étude de cas",
+      iconAlt: "Icône de l'app {name}",
       screenshots: "Captures d'écran",
       questionTitle: "Une question sur l'app ?",
       writeToMe: "M'écrire",
@@ -69,6 +70,7 @@ export const ui = {
     },
     project: {
       titleSuffix: "case study",
+      iconAlt: "{name} app icon",
       screenshots: "Screenshots",
       questionTitle: "A question about the app?",
       writeToMe: "Write to me",
