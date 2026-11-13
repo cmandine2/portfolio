@@ -13,27 +13,44 @@ facts:
   - label: Language
     value: French
 images:
-  - alt: The night summary
+  - src: ./images/night.png
+    alt: "Restless night screen, in French: 6 h 30 of sleep, 3 urges to move and the sleep stage timeline"
     caption: The night summary
-  - alt: The daily journal
+  - src: ./images/journal.png
+    alt: "Logging screen, in French: Bedtime and Urge to move buttons, then the day's factors to tick"
     caption: The daily journal
-  - alt: The trend analysis
+  - src: ./images/analysis.png
+    alt: "Analysis screen, in French: bars showing the factors linked to more or fewer urges to move"
     caption: The trend analysis
-  - alt: The two night-time gestures, on the wrist
+  - src: ./images/watch.png
+    alt: "Apple Watch screen, in French: in bed since 22:52, and a counter showing 3 urges to move tonight"
     caption: The two night-time gestures, on the wrist
     device: watch
 ---
 
-## The problem
+## Why this app
 
-Raw sleep data, from the Health app or the watch, is not enough to understand restless legs syndrome. It has to be set against what you actually lived through: the urges to move, the times you got up at night, treatments, factors from the day. And logging all this has to take a single gesture, in the middle of the night.
+I live with restless legs syndrome. After trying many treatments and alternative therapies without real results, I wanted to understand what was affecting my sleep and my urges to move. So I built Acalme, first of all for my own nights.
+
+Its name is a play on words: Acalme sounds like “a calm me” in English and like “<span lang="fr">accalmie</span>” (a lull) in French.
+
+## The solution
+
+Acalme is a night journal. The principle: log as little as possible, and let the app connect the rest.
+
+1. **Log in one gesture.** An urge to move or bedtime is logged in one tap, from the app, a widget, Control Center or the Apple Watch.
+2. **Set it against sleep.** The app reads nights from the Health app and places the urges to move on them. A few taps add the day's factors and treatments.
+3. **See what stands out.** The analysis is concrete: it starts from everyday data, not impressions. Over the weeks, it shows what goes with calmer or more restless nights.
+4. **Share with your doctor.** The sleep diary exports as a PDF, to print or to show during an appointment.
 
 ## What the app does
 
-- Log an episode in a single gesture, from the app, a widget, Control Center or the Apple Watch.
-- Review a summary of each night: sleep stages, awakenings, detected get-ups.
-- Keep a journal of everyday factors and treatments.
-- Spot trends to share with your doctor. The app helps you observe; it does not replace medical advice.
+- A summary of each night: sleep duration and stages, awakenings, times out of bed, time to fall asleep.
+- A calendar that colours each night by how restless it was.
+- A manual mode, without an Apple Watch, to log bedtime and wake-up time yourself.
+- A short severity questionnaire, to retake from time to time and follow how things evolve.
+
+The app helps you observe. It makes no diagnosis and does not replace medical advice.
 
 ## My design choices
 

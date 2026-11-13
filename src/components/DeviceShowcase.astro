@@ -1,0 +1,85 @@
+---
+import Screenshot from "./Screenshot.astro";
+import type { Lang } from "../i18n/ui";
+import type { Project } from "../lib/projects";
+
+type ProjectImage = Project["entry"]["data"]["images"][number];
+
+interface Props {
+  lang: Lang;
+  images: ProjectImage[];
+  /** Colour of the round bubble behind the devices. */
+  tone?: "cream" | "lagoon";
+}
+
+const { lang, images, tone = "cream" } = Astro.props;
+const phone = images.find((image) => image.device !== "watch");
+const watch = images.find((image) => image.device === "watch" && image.src);
+---
+
+{phone && (
+  <div class:list={["showcase", tone, { duo: watch }]}>
+    <div class="phone">
+      <Screenshot
+        lang={lang}
+        src={phone.src}
+        alt={phone.alt}
+        variant="frame"
+        sizes="220px"
+      />
+    </div>
+    {watch && (
+      <div class="watch">
+        <Screenshot
+          lang={lang}
+          src={watch.src}
+          alt={watch.alt}
+          device="watch"
+          variant="frame"
+          sizes="130px"
+        />
+      </div>
+    )}
+  </div>
+)}
+
+<style>
+  /* The devices are taller than the bubble on purpose: they stick out of it. */
+  .showcase {
+    position: relative;
+    width: min(100%, 340px);
+    aspect-ratio: 1 / 1;
+    margin-block: 12%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+  }
+
+  .cream {
+    background: var(--cream);
+  }
+
+  .lagoon {
+    background: var(--lagoon);
+  }
+
+  .phone {
+    width: 58%;
+    transform: rotate(-6deg);
+    filter: drop-shadow(10px 12px 0 rgb(14 74 83 / 0.28));
+  }
+
+  .duo .phone {
+    transform: translateX(-12%) rotate(-6deg);
+  }
+
+  .watch {
+    position: absolute;
+    right: 2%;
+    bottom: 2%;
+    width: 36%;
+    transform: rotate(7deg);
+    filter: drop-shadow(6px 8px 0 rgb(14 74 83 / 0.28));
+  }
+</style>

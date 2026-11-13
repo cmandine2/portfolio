@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import BaseLayout from "../../../layouts/BaseLayout.astro";
+import DeviceShowcase from "../../../components/DeviceShowcase.astro";
 import Screenshot from "../../../components/Screenshot.astro";
 import TentacleDivider from "../../../components/TentacleDivider.astro";
 import WaveEdge from "../../../components/WaveEdge.astro";
@@ -50,8 +51,9 @@ const cover = images[0];
 // The Markdown body is cut at each "## heading": one card per section.
 const html = project.entry.rendered?.html ?? "";
 const sections = html.split(/(?=<h2[\s>])/).filter((part) => part.trim());
-const intro = sections.slice(0, 2);
-const rest = sections.slice(2);
+// Three cards before the screenshots, the others after.
+const intro = sections.slice(0, 3);
+const rest = sections.slice(3);
 
 const mailto = `mailto:${contactEmail}?subject=${encodeURIComponent(title)}`;
 ---
@@ -126,17 +128,7 @@ const mailto = `mailto:${contactEmail}?subject=${encodeURIComponent(title)}`;
         </div>
         {cover && (
           <div class="hero-visual">
-            <div class="bubble">
-              <div class="phone">
-                <Screenshot
-                  lang={lang}
-                  src={cover.src}
-                  alt={cover.alt}
-                  variant="frame"
-                  sizes="170px"
-                />
-              </div>
-            </div>
+            <DeviceShowcase lang={lang} images={images} />
           </div>
         )}
       </div>
@@ -191,7 +183,7 @@ const mailto = `mailto:${contactEmail}?subject=${encodeURIComponent(title)}`;
   )}
 
   <section class="container question" aria-labelledby="question">
-    <div class="question-box on-saffron">
+    <div class="question-box on-saffron highlight">
       <h2 id="question">{t.project.questionTitle}</h2>
       <div class="question-actions">
         {hasSupport && (
@@ -333,21 +325,6 @@ const mailto = `mailto:${contactEmail}?subject=${encodeURIComponent(title)}`;
     justify-content: center;
   }
 
-  .bubble {
-    width: min(100%, 360px);
-    aspect-ratio: 1 / 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--cream);
-    border-radius: 50%;
-  }
-
-  .phone {
-    width: 46%;
-    transform: rotate(-6deg);
-  }
-
   .cards {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
@@ -357,6 +334,11 @@ const mailto = `mailto:${contactEmail}?subject=${encodeURIComponent(title)}`;
 
   .cards.first {
     padding-block: 64px 24px;
+  }
+
+  /* The opening card takes the full width; the next two sit side by side. */
+  .cards.first > :first-child {
+    grid-column: 1 / -1;
   }
 
   .prose :global(h2) {

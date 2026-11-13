@@ -124,8 +124,38 @@ a:hover {
   border-radius: var(--radius);
 }
 
-.card--featured {
-  box-shadow: 6px 6px 0 var(--saffron);
+/* Highlight: the block under the pointer, or holding keyboard focus,
+   gets an offset shadow. Any block can opt in with class="highlight". */
+.card,
+.highlight {
+  --highlight-color: var(--saffron);
+  box-shadow: 0 0 0 var(--highlight-color);
+  transition: box-shadow 0.18s ease-out;
+}
+
+.on-saffron.highlight {
+  --highlight-color: var(--abyss);
+}
+
+.card:hover,
+.card:has(:focus-visible),
+.highlight:hover,
+.highlight:has(:focus-visible) {
+  box-shadow: 6px 6px 0 var(--highlight-color);
+}
+
+/* Touch screens have no pointer to follow: the featured card stays highlighted. */
+@media (hover: none) {
+  .card--featured {
+    box-shadow: 6px 6px 0 var(--highlight-color);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .highlight {
+    transition: none;
+  }
 }
 
 .section-title {
