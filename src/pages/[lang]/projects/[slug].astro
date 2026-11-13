@@ -4,13 +4,24 @@ import Screenshot from "../../../components/Screenshot.astro";
 import TentacleDivider from "../../../components/TentacleDivider.astro";
 import WaveEdge from "../../../components/WaveEdge.astro";
 import { contactEmail, languages, ui, type Lang } from "../../../i18n/ui";
-import { getPublishedProjects, type Project } from "../../../lib/projects";
+import {
+  getPrivacyPages,
+  getPublishedProjects,
+  type Project,
+} from "../../../lib/projects";
 
 export async function getStaticPaths() {
   const paths = [];
   for (const lang of languages) {
+    const privacyPages = await getPrivacyPages(lang);
     for (const project of await getPublishedProjects(lang)) {
-      paths.push({ params: { lang, slug: project.slug }, props: { project } });
+      const hasPrivacy = privacyPages.some(
+        (page) => page.slug === project.slug,
+      );
+      paths.push({
+        params: { lang, slug: project.slug },
+        props: { project, hasPrivacy },
+      });
     }
   }
   return paths;
@@ -18,11 +29,12 @@ export async function getStaticPaths() {
 
 interface Props {
   project: Project;
+  hasPrivacy: boolean;
 }
 
 const lang = Astro.params.lang as Lang;
 const t = ui[lang];
-const { project } = Astro.props;
+const { project, hasPrivacy } = Astro.props;
 const { title, summary, facts, images } = project.entry.data;
 const cover = images[0];
 
@@ -74,6 +86,16 @@ const mailto = `mailto:${contactEmail}?subject=${encodeURIComponent(title)}`;
                 </>
               ))}
             </dl>
+          )}
+          {hasPrivacy && (
+            <p class="actions">
+              <a
+                class="pill"
+                href={`/${lang}/projects/${project.slug}/privacy/`}
+              >
+                {t.privacy.label}
+              </a>
+            </p>
           )}
         </div>
         {cover && (
@@ -231,6 +253,29 @@ const mailto = `mailto:${contactEmail}?subject=${encodeURIComponent(title)}`;
 
   dt {
     font-weight: 600;
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 28px;
+  }
+
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 20px;
+    border: 2px solid var(--cream);
+    border-radius: 999px;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .pill:hover {
+    background: var(--cream);
+    color: var(--lagoon);
   }
 
   .hero-visual {

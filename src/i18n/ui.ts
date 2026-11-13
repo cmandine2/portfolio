@@ -32,6 +32,15 @@ export const ui = {
       questionTitle: "Une question sur l'app ?",
       writeToMe: "M'écrire",
     },
+    privacy: {
+      label: "Confidentialité",
+      title: "Politique de confidentialité",
+      app: "Application",
+      updated: "Dernière mise à jour",
+      summaryTitle: "En bref",
+      contents: "Sommaire",
+      draft: "Brouillon : cette page n'est pas encore publiée.",
+    },
     status: {
       upcoming: "En préparation",
     },
@@ -63,6 +72,15 @@ export const ui = {
       screenshots: "Screenshots",
       questionTitle: "A question about the app?",
       writeToMe: "Write to me",
+    },
+    privacy: {
+      label: "Privacy",
+      title: "Privacy policy",
+      app: "App",
+      updated: "Last updated",
+      summaryTitle: "In short",
+      contents: "Contents",
+      draft: "Draft: this page is not published yet.",
     },
     status: {
       upcoming: "Coming soon",

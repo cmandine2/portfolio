@@ -35,4 +35,20 @@ const projects = defineCollection({
     }),
 });
 
-export const collections = { projects };
+// Privacy policy of an app:
+// src/content/projects/<slug>/privacy/fr.md and en.md
+const privacy = defineCollection({
+  loader: glob({
+    pattern: "*/privacy/{fr,en}.md",
+    base: "./src/content/projects",
+  }),
+  schema: z.object({
+    // In short: what data, where it stays, who can access it.
+    summary: z.array(z.string().min(1)).default([]),
+    updated: z.coerce.date().optional(),
+    // While false, the page only exists in `npm run dev`.
+    published: z.boolean(),
+  }),
+});
+
+export const collections = { projects, privacy };
