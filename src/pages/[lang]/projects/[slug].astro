@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import BaseLayout from "../../../layouts/BaseLayout.astro";
+import DeviceShowcase from "../../../components/DeviceShowcase.astro";
 import Screenshot from "../../../components/Screenshot.astro";
 import TentacleDivider from "../../../components/TentacleDivider.astro";
 import WaveEdge from "../../../components/WaveEdge.astro";
@@ -126,17 +127,7 @@ const mailto = `mailto:${contactEmail}?subject=${encodeURIComponent(title)}`;
         </div>
         {cover && (
           <div class="hero-visual">
-            <div class="bubble">
-              <div class="phone">
-                <Screenshot
-                  lang={lang}
-                  src={cover.src}
-                  alt={cover.alt}
-                  variant="frame"
-                  sizes="170px"
-                />
-              </div>
-            </div>
+            <DeviceShowcase lang={lang} images={images} />
           </div>
         )}
       </div>
@@ -331,21 +322,6 @@ const mailto = `mailto:${contactEmail}?subject=${encodeURIComponent(title)}`;
     flex: 1 1 280px;
     display: flex;
     justify-content: center;
-  }
-
-  .bubble {
-    width: min(100%, 360px);
-    aspect-ratio: 1 / 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--cream);
-    border-radius: 50%;
-  }
-
-  .phone {
-    width: 46%;
-    transform: rotate(-6deg);
   }
 
   .cards {
