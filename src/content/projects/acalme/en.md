@@ -22,6 +22,10 @@ images:
   - src: ./images/analysis.png
     alt: "Analysis screen, in French: bars showing the factors linked to more or fewer urges to move"
     caption: The trend analysis
+  - src: ./images/watch.png
+    alt: "Apple Watch screen, in French: in bed since 22:52, and a counter showing 3 urges to move tonight"
+    caption: The two night-time gestures, on the wrist
+    device: watch
 ---
 
 ## Why this app

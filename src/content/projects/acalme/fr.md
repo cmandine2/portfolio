@@ -22,6 +22,10 @@ images:
   - src: ./images/analysis.png
     alt: "Écran Analyse : barres montrant les facteurs liés à plus ou moins d'impatiences"
     caption: L'analyse des tendances
+  - src: ./images/watch.png
+    alt: "Écran de l'Apple Watch : « Au lit depuis 22:52 » et un compteur de 3 impatiences cette nuit"
+    caption: Les deux gestes de la nuit, au poignet
+    device: watch
 ---
 
 ## Pourquoi cette app
