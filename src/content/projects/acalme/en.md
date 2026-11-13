@@ -12,6 +12,8 @@ facts:
     value: iPhone (iOS 18 or later), optional Apple Watch (watchOS 10.6 or later)
   - label: Language
     value: French
+  - label: The name
+    value: 'A play on words: Acalme reads as “a calm me” in English and as “<span lang="fr">accalmie</span>” (a lull) in French.'
 images:
   - src: ./images/night.png
     alt: "Restless night screen, in French: 6 h 30 of sleep, 3 urges to move and the sleep stage timeline"
@@ -22,9 +24,6 @@ images:
   - src: ./images/analysis.png
     alt: "Analysis screen, in French: bars showing the factors linked to more or fewer urges to move"
     caption: The trend analysis
-  - src: ./images/calendar.png
-    alt: "Month calendar, each night coloured by its number of urges to move"
-    caption: The calendar of nights
 ---
 
 ## The problem

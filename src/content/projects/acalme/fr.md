@@ -12,6 +12,8 @@ facts:
     value: iPhone (iOS 18 ou ultérieur), Apple Watch en option (watchOS 10.6 ou ultérieur)
   - label: Langue
     value: Français
+  - label: Le nom
+    value: 'Un jeu de mots : Acalme se lit « accalmie » en français et « <span lang="en">a calm me</span> » en anglais.'
 images:
   - src: ./images/night.png
     alt: "Écran « Nuit agitée » : 6 h 30 de sommeil, 3 impatiences, et la frise des phases de sommeil"
@@ -22,9 +24,6 @@ images:
   - src: ./images/analysis.png
     alt: "Écran Analyse : barres montrant les facteurs liés à plus ou moins d'impatiences"
     caption: L'analyse des tendances
-  - src: ./images/calendar.png
-    alt: "Calendrier du mois, chaque nuit colorée selon le nombre d'impatiences"
-    caption: Le calendrier des nuits
 ---
 
 ## Le problème
