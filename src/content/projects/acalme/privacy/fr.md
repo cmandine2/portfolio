@@ -1,6 +1,6 @@
 ---
 published: false
-updated: 2026-11-05
+updated: 2026-11-13
 summary:
   - Tes données restent sur ton iPhone. Je n'ai aucun serveur, aucun compte, aucun accès à ton journal.
   - Aucun suivi, aucune publicité, aucune statistique d'usage, aucun SDK tiers.
@@ -49,7 +49,7 @@ L'app n'utilise ni ta position, ni ton identifiant publicitaire, ni tes contacts
 
 ## Intelligence artificielle
 
-Les bilans et réponses rédigés de l'onglet Analyse s'appuient, lorsque ton iPhone le permet, sur le modèle de langage intégré à iOS (Apple Intelligence). Il s'exécute sur ton appareil : ton journal n'est envoyé à aucun serveur pour produire ces textes. Sur un appareil qui ne le propose pas, l'app utilise des textes générés par des règles, également sur l'appareil.
+Les bilans et réponses rédigés de l'onglet Analyse s'appuient, lorsque ton iPhone le permet, sur le modèle de langage intégré à iOS (Apple Intelligence). Apple Intelligence est disponible sur l'iPhone 15 Pro, l'iPhone 15 Pro Max, et sur l'iPhone 16 et les modèles plus récents. Il s'exécute sur ton appareil : ton journal n'est envoyé à aucun serveur pour produire ces textes. Sur un appareil qui ne le propose pas, l'app utilise des textes générés par des règles, également sur l'appareil.
 
 ## Partage avec des tiers
 
