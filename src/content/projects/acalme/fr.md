@@ -13,15 +13,18 @@ facts:
   - label: Langue
     value: Français
 images:
-  - alt: Le récapitulatif de la nuit
+  - src: ./images/night.png
+    alt: "Écran « Nuit agitée » : 6 h 30 de sommeil, 3 impatiences, et la frise des phases de sommeil"
     caption: Le récapitulatif de la nuit
-  - alt: Le journal de la journée
+  - src: ./images/journal.png
+    alt: "Écran de saisie : boutons Coucher et Impatience, puis les facteurs de la journée à cocher"
     caption: Le journal de la journée
-  - alt: L'analyse des tendances
+  - src: ./images/analysis.png
+    alt: "Écran Analyse : barres montrant les facteurs liés à plus ou moins d'impatiences"
     caption: L'analyse des tendances
-  - alt: Les deux gestes de la nuit, au poignet
-    caption: Les deux gestes de la nuit, au poignet
-    device: watch
+  - src: ./images/calendar.png
+    alt: "Calendrier du mois, chaque nuit colorée selon le nombre d'impatiences"
+    caption: Le calendrier des nuits
 ---
 
 ## Le problème

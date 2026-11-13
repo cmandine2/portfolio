@@ -13,15 +13,18 @@ facts:
   - label: Language
     value: French
 images:
-  - alt: The night summary
+  - src: ./images/night.png
+    alt: "Restless night screen, in French: 6 h 30 of sleep, 3 urges to move and the sleep stage timeline"
     caption: The night summary
-  - alt: The daily journal
+  - src: ./images/journal.png
+    alt: "Logging screen, in French: Bedtime and Urge to move buttons, then the day's factors to tick"
     caption: The daily journal
-  - alt: The trend analysis
+  - src: ./images/analysis.png
+    alt: "Analysis screen, in French: bars showing the factors linked to more or fewer urges to move"
     caption: The trend analysis
-  - alt: The two night-time gestures, on the wrist
-    caption: The two night-time gestures, on the wrist
-    device: watch
+  - src: ./images/calendar.png
+    alt: "Month calendar, each night coloured by its number of urges to move"
+    caption: The calendar of nights
 ---
 
 ## The problem
