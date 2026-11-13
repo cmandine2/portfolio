@@ -60,7 +60,10 @@ const mailto = `mailto:${contactEmail}?subject=${encodeURIComponent(title)}`;
   <div class="container app-page">
     {!published && <p class="draft-banner">{t.draft}</p>}
 
-    <section class="contact on-saffron" aria-labelledby="contact-title">
+    <section
+      class="contact on-saffron highlight"
+      aria-labelledby="contact-title"
+    >
       <div>
         <h2 id="contact-title">{t.support.contactTitle}</h2>
         <p>{contactHint}</p>

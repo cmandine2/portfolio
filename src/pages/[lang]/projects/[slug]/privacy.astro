@@ -68,7 +68,10 @@ const updatedText =
   <div class="container app-page">
     {!published && <p class="draft-banner">{t.draft}</p>}
     {summary.length > 0 && (
-      <section class="summary on-saffron" aria-labelledby="summary-title">
+      <section
+        class="summary on-saffron highlight"
+        aria-labelledby="summary-title"
+      >
         <h2 id="summary-title">{t.privacy.summaryTitle}</h2>
         <ul>
           {summary.map((line) => (
