@@ -12,7 +12,7 @@
         "/fr/projects/acalme/support/index.html",
         "/en/projects/acalme/support/index.html"
       ],
-      "numberOfRuns": 1
+      "numberOfRuns": 3
     },
     "assert": {
       "assertions": {
