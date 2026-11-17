@@ -1,0 +1,26 @@
+{
+  "ci": {
+    "collect": {
+      "staticDistDir": "./dist",
+      "url": [
+        "/fr/index.html",
+        "/en/index.html",
+        "/fr/projects/acalme/index.html",
+        "/en/projects/acalme/index.html",
+        "/fr/projects/acalme/privacy/index.html",
+        "/en/projects/acalme/privacy/index.html",
+        "/fr/projects/acalme/support/index.html",
+        "/en/projects/acalme/support/index.html"
+      ],
+      "numberOfRuns": 3
+    },
+    "assert": {
+      "assertions": {
+        "categories:performance": ["error", { "minScore": 0.9 }],
+        "categories:seo": ["error", { "minScore": 0.95 }],
+        "categories:accessibility": ["error", { "minScore": 1 }]
+      }
+    },
+    "upload": { "target": "filesystem", "outputDir": ".lighthouseci" }
+  }
+}
