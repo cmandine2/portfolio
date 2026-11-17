@@ -1,5 +1,6 @@
 ---
 import { contactEmail, ui, type Lang } from "../i18n/ui";
+import { getLegalPage } from "../lib/projects";
 
 interface Props {
   lang: Lang;
@@ -8,6 +9,7 @@ interface Props {
 const { lang } = Astro.props;
 const t = ui[lang];
 const year = new Date().getFullYear();
+const legal = await getLegalPage(lang);
 ---
 
 <footer class="on-lagoon">
@@ -21,6 +23,7 @@ const year = new Date().getFullYear();
     />
     <nav aria-label={t.footerNav}>
       <a href={`mailto:${contactEmail}`}>{contactEmail}</a>
+      {legal && <a href={`/${lang}/legal/`}>{t.legal.label}</a>}
       <span>© {year} Amandine Cousin</span>
     </nav>
   </div>
