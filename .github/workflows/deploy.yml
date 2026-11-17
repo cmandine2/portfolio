@@ -4,37 +4,89 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Simulation : liste les changements sans rien envoyer"
+        type: boolean
+        default: true
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 concurrency:
-  group: pages
+  group: deploy-ovh
   cancel-in-progress: false
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
+    env:
+      OVH_SFTP_HOST: ${{ secrets.OVH_SFTP_HOST }}
+      OVH_SFTP_USER: ${{ secrets.OVH_SFTP_USER }}
+      OVH_SFTP_PASSWORD: ${{ secrets.OVH_SFTP_PASSWORD }}
+      DRY_RUN: ${{ inputs.dry_run == true }}
+      SITE_URL: https://amandinecousin.com
     steps:
+      - name: Check deployment secrets
+        id: config
+        run: |
+          if [ -n "$OVH_SFTP_HOST" ] && [ -n "$OVH_SFTP_USER" ] && [ -n "$OVH_SFTP_PASSWORD" ]; then
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          elif [ "$GITHUB_EVENT_NAME" = "workflow_dispatch" ]; then
+            echo "::error::Missing OVH_SFTP_HOST, OVH_SFTP_USER or OVH_SFTP_PASSWORD secret."
+            exit 1
+          else
+            echo "::warning::Deployment secrets are not set: nothing deployed."
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+          fi
+
       - uses: actions/checkout@v4
+        if: steps.config.outputs.ready == 'true'
+
       - uses: actions/setup-node@v4
+        if: steps.config.outputs.ready == 'true'
         with:
           node-version-file: .nvmrc
           cache: npm
-      - run: npm ci
-      - run: npm run build
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: dist
 
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - id: deployment
-        uses: actions/deploy-pages@v4
+      - name: Build and check the site
+        if: steps.config.outputs.ready == 'true'
+        run: |
+          npm ci
+          npm run build
+          npm run check:build
+
+      - name: Install lftp
+        if: steps.config.outputs.ready == 'true'
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq lftp
+
+      # Sends dist/ to www/ over SFTP. The server key is pinned in .github/ovh_known_hosts.
+      # Files in www/ that are not in dist/ are removed, except OVH's own entries.
+      - name: Upload to OVH (SFTP)
+        if: steps.config.outputs.ready == 'true'
+        run: |
+          if [ "$DRY_RUN" = "true" ]; then dry="--dry-run"; else dry=""; fi
+          cat > "$RUNNER_TEMP/deploy.lftp" <<EOF
+          set sftp:connect-program "ssh -a -x -o UserKnownHostsFile=$GITHUB_WORKSPACE/.github/ovh_known_hosts -o StrictHostKeyChecking=yes"
+          set net:max-retries 2
+          set net:timeout 20
+          mirror --reverse --delete --parallel=4 --verbose $dry \\
+            --exclude '^\\.ovhconfig\$' \\
+            --exclude '^\\.well-known(/|\$)' \\
+            --exclude '^cgi-bin(/|\$)' \\
+            dist www
+          quit
+          EOF
+          LFTP_PASSWORD="$OVH_SFTP_PASSWORD" lftp --env-password -u "$OVH_SFTP_USER" -f "$RUNNER_TEMP/deploy.lftp" "sftp://$OVH_SFTP_HOST"
+
+      - name: Check the live site
+        if: steps.config.outputs.ready == 'true' && env.DRY_RUN != 'true'
+        run: |
+          curl -fsS --retry 3 --retry-delay 5 --max-time 20 -o /dev/null "$SITE_URL/fr/"
+          final=$(curl -fsSL --max-redirs 3 --max-time 20 -o /dev/null -w '%{url_effective}' "http://www.amandinecousin.com/fr/")
+          if [ "$final" != "$SITE_URL/fr/" ]; then
+            echo "::error::http://www.amandinecousin.com/fr/ ends on $final instead of $SITE_URL/fr/"
+            exit 1
+          fi
+          curl -fsSI --max-time 20 "$SITE_URL/fr/" | grep -qi '^strict-transport-security:' \
+            || echo "::warning::No Strict-Transport-Security header: check that .htaccess is applied."
