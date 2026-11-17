@@ -1,5 +1,7 @@
 # Apache configuration served by the OVH hosting (copied as-is from public/ to dist/).
 
+ErrorDocument 404 /404.html
+
 RewriteEngine On
 
 # One hop to the canonical address: HTTPS, without www.

@@ -9,9 +9,10 @@ import {
 
 interface Props {
   lang: Lang;
+  showLanguageSwitch?: boolean;
 }
 
-const { lang } = Astro.props;
+const { lang, showLanguageSwitch = true } = Astro.props;
 const t = ui[lang];
 const other = otherLang(lang);
 ---
@@ -29,25 +30,27 @@ const other = otherLang(lang);
       <a class="nav-link" href={`/${lang}/#contact`}>
         {t.nav.contact}
       </a>
-      <span class="switch">
-        {languages.map((code) =>
-          code === lang ? (
-            <span class="switch-item current" aria-current="true">
-              {code.toUpperCase()}
-            </span>
-          ) : (
-            <a
-              class="switch-item"
-              href={switchLangPath(Astro.url.pathname, other)}
-              lang={other}
-              hreflang={other}
-              aria-label={t.switchLanguage}
-            >
-              {code.toUpperCase()}
-            </a>
-          ),
-        )}
-      </span>
+      {showLanguageSwitch && (
+        <span class="switch">
+          {languages.map((code) =>
+            code === lang ? (
+              <span class="switch-item current" aria-current="true">
+                {code.toUpperCase()}
+              </span>
+            ) : (
+              <a
+                class="switch-item"
+                href={switchLangPath(Astro.url.pathname, other)}
+                lang={other}
+                hreflang={other}
+                aria-label={t.switchLanguage}
+              >
+                {code.toUpperCase()}
+              </a>
+            ),
+          )}
+        </span>
+      )}
     </nav>
   </div>
 </header>
