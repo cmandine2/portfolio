@@ -12,6 +12,7 @@
     "astro": "astro",
     "check": "astro check",
     "check:build": "node scripts/check-build.mjs",
+    "lighthouse": "lhci autorun",
     "format": "prettier --write .",
     "format:check": "prettier --check ."
   },
@@ -20,6 +21,7 @@
   },
   "devDependencies": {
     "@astrojs/check": "0.9.12",
+    "@lhci/cli": "0.16.1",
     "prettier": "3.9.10",
     "prettier-plugin-astro": "1.1.2",
     "typescript": "6.0.3"
