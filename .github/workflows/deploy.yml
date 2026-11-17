@@ -70,6 +70,7 @@ jobs:
           set sftp:connect-program "ssh -a -x -o UserKnownHostsFile=$GITHUB_WORKSPACE/.github/ovh_known_hosts -o StrictHostKeyChecking=yes"
           set net:max-retries 2
           set net:timeout 20
+          open --env-password -u $OVH_SFTP_USER sftp://$OVH_SFTP_HOST
           mirror --reverse --delete --parallel=4 --verbose $dry \\
             --exclude '^\\.ovhconfig\$' \\
             --exclude '^\\.well-known(/|\$)' \\
@@ -77,7 +78,7 @@ jobs:
             dist www
           quit
           EOF
-          LFTP_PASSWORD="$OVH_SFTP_PASSWORD" lftp --env-password -u "$OVH_SFTP_USER" -f "$RUNNER_TEMP/deploy.lftp" "sftp://$OVH_SFTP_HOST"
+          LFTP_PASSWORD="$OVH_SFTP_PASSWORD" lftp -f "$RUNNER_TEMP/deploy.lftp"
 
       - name: Check the live site
         if: steps.config.outputs.ready == 'true' && env.DRY_RUN != 'true'
