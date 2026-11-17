@@ -10,7 +10,9 @@
         "/fr/projects/acalme/privacy/index.html",
         "/en/projects/acalme/privacy/index.html",
         "/fr/projects/acalme/support/index.html",
-        "/en/projects/acalme/support/index.html"
+        "/en/projects/acalme/support/index.html",
+        "/fr/legal/index.html",
+        "/en/legal/index.html"
       ],
       "numberOfRuns": 3
     },
