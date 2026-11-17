@@ -8,9 +8,11 @@ interface Props {
   lang: Lang;
   title: string;
   description: string;
+  /** Page outside the /fr/ and /en/ tree (404): no canonical, no hreflang, not indexed. */
+  standalone?: boolean;
 }
 
-const { lang, title, description } = Astro.props;
+const { lang, title, description, standalone = false } = Astro.props;
 const t = ui[lang];
 const { pathname } = Astro.url;
 const absolute = (path: string) => new URL(path, Astro.site).href;
@@ -23,19 +25,25 @@ const absolute = (path: string) => new URL(path, Astro.site).href;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <link rel="canonical" href={absolute(pathname)} />
-    {languages.map((code) => (
-      <link
-        rel="alternate"
-        hreflang={code}
-        href={absolute(switchLangPath(pathname, code))}
-      />
-    ))}
-    <link
-      rel="alternate"
-      hreflang="x-default"
-      href={absolute(switchLangPath(pathname, "fr"))}
-    />
+    {standalone ? (
+      <meta name="robots" content="noindex" />
+    ) : (
+      <>
+        <link rel="canonical" href={absolute(pathname)} />
+        {languages.map((code) => (
+          <link
+            rel="alternate"
+            hreflang={code}
+            href={absolute(switchLangPath(pathname, code))}
+          />
+        ))}
+        <link
+          rel="alternate"
+          hreflang="x-default"
+          href={absolute(switchLangPath(pathname, "fr"))}
+        />
+      </>
+    )}
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
@@ -50,7 +58,7 @@ const absolute = (path: string) => new URL(path, Astro.site).href;
     <a class="skip-link" href="#main">
       {t.skipToContent}
     </a>
-    <Header lang={lang} />
+    <Header lang={lang} showLanguageSwitch={!standalone} />
     <main id="main" tabindex="-1">
       <slot />
     </main>

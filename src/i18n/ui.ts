@@ -56,6 +56,11 @@ export const ui = {
     status: {
       upcoming: "En préparation",
     },
+    notFound: {
+      title: "Page introuvable",
+      text: "Le lien est peut-être incorrect, ou la page a changé d'adresse.",
+      home: "Retour à l'accueil",
+    },
   },
   en: {
     skipToContent: "Skip to content",
@@ -108,6 +113,11 @@ export const ui = {
     },
     status: {
       upcoming: "Coming soon",
+    },
+    notFound: {
+      title: "Page not found",
+      text: "The link may be wrong, or the page may have moved.",
+      home: "Back to the home page",
     },
   },
 } as const;

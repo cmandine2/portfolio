@@ -57,6 +57,17 @@ if (!root || !/url=\/fr\/"/.test(root)) {
   fail("/", "the root page must redirect to /fr/");
 }
 
+// 1b. The 404 page exists (the server serves it for unknown URLs) and is not indexed
+const notFound = pages.get("/404.html");
+if (!notFound) {
+  fail("/404.html", "the 404 page is missing");
+} else if (!/<meta name="robots" content="noindex"/.test(notFound)) {
+  fail(
+    "/404.html",
+    'the 404 page must contain <meta name="robots" content="noindex">',
+  );
+}
+
 for (const url of sitePages) {
   const html = pages.get(url);
   const lang = url.split("/")[1];

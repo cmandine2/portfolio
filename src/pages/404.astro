@@ -1,0 +1,52 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { languages, ui } from "../i18n/ui";
+
+// One page for both languages: the visitor's language is unknown here.
+const fr = ui.fr;
+---
+
+<BaseLayout
+  lang="fr"
+  title={`${ui.fr.notFound.title} · ${ui.en.notFound.title}`}
+  description={fr.notFound.text}
+  standalone
+>
+  <div class="container not-found">
+    {languages.map((code, index) => {
+      const t = ui[code].notFound;
+      const Heading = index === 0 ? "h1" : "h2";
+      return (
+        <section lang={code}>
+          <Heading>{t.title}</Heading>
+          <p>{t.text}</p>
+          <a class="button" href={`/${code}/`}>
+            {t.home}
+          </a>
+        </section>
+      );
+    })}
+  </div>
+</BaseLayout>
+
+<style>
+  .not-found {
+    display: grid;
+    gap: 48px 64px;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    padding-block: 72px;
+  }
+
+  h1,
+  h2 {
+    font-size: clamp(28px, 4vw, 40px);
+    line-height: 1.2;
+  }
+
+  section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+</style>
