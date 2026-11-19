@@ -56,4 +56,5 @@ L'app aide à observer. Elle ne pose pas de diagnostic et ne remplace pas un avi
 
 - Swift 6 et SwiftUI, sur iPhone, Apple Watch et widgets.
 - Accès à Santé en lecture seule : l'app n'écrit jamais dans Santé.
-- Testée sur 13 profils d'usage (avec ou sans montre, autorisations refusées, historique court ou long…).
+- L'IA intégrée à l'appareil (Apple Intelligence) pour rédiger les analyses : aucun service tiers, aucune donnée envoyée à l'extérieur pour les produire.
+- Testée sur différents profils d'usage (avec ou sans montre, autorisations refusées, historique court ou long…).
