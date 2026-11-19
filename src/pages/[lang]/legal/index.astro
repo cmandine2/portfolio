@@ -1,0 +1,84 @@
+---
+import { render } from "astro:content";
+import AppPageHeader from "../../../components/AppPageHeader.astro";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import { languages, ui, type Lang } from "../../../i18n/ui";
+import { getLegalPage, type LegalPage } from "../../../lib/projects";
+
+export async function getStaticPaths() {
+  const paths = [];
+  for (const lang of languages) {
+    const page = await getLegalPage(lang);
+    if (page) paths.push({ params: { lang }, props: { page } });
+  }
+  return paths;
+}
+
+interface Props {
+  page: LegalPage;
+}
+
+const lang = Astro.params.lang as Lang;
+const t = ui[lang];
+const { page } = Astro.props;
+const { Content } = await render(page);
+---
+
+<BaseLayout
+  lang={lang}
+  title={`${t.legal.title} — Amandine Cousin`}
+  description={t.legal.lead}
+>
+  <AppPageHeader
+    lang={lang}
+    parentHref={`/${lang}/`}
+    parentLabel="Amandine Cousin"
+    current={t.legal.label}
+    title={t.legal.title}
+  >
+    {t.legal.lead}
+  </AppPageHeader>
+
+  <div class="container app-page">
+    {!page.data.published && <p class="draft-banner">{t.draft}</p>}
+    <div class="card prose">
+      <Content />
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .prose :global(h2) {
+    margin: 32px 0 10px;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 1.25;
+    color: var(--abyss);
+  }
+
+  .prose :global(h2:first-child) {
+    margin-top: 0;
+  }
+
+  .prose :global(p),
+  .prose :global(ul) {
+    margin: 0;
+  }
+
+  .prose :global(* + p),
+  .prose :global(* + ul) {
+    margin-top: 12px;
+  }
+
+  .prose :global(h2 + *) {
+    margin-top: 0;
+  }
+
+  .prose :global(ul) {
+    padding-left: 22px;
+  }
+
+  .prose :global(li + li) {
+    margin-top: 6px;
+  }
+</style>

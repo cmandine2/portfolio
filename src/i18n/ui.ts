@@ -53,6 +53,11 @@ export const ui = {
       summaryTitle: "En bref",
       contents: "Sommaire",
     },
+    legal: {
+      label: "Mentions légales",
+      title: "Mentions légales",
+      lead: "Qui édite ce site, et qui l'héberge.",
+    },
     status: {
       upcoming: "En préparation",
     },
@@ -110,6 +115,11 @@ export const ui = {
       updated: "Last updated",
       summaryTitle: "In short",
       contents: "Contents",
+    },
+    legal: {
+      label: "Legal notice",
+      title: "Legal notice",
+      lead: "Who publishes this site, and who hosts it.",
     },
     status: {
       upcoming: "Coming soon",

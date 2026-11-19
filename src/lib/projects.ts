@@ -102,3 +102,36 @@ async function getAppPages<C extends AppPageCollection>(
 
 export const getPrivacyPages = (lang: Lang) => getAppPages("privacy", lang);
 export const getSupportPages = (lang: Lang) => getAppPages("support", lang);
+
+export type LegalPage = CollectionEntry<"legal">;
+
+/**
+ * Legal notice of the site in one language, or undefined while it is a draft
+ * (drafts are only served by the dev server).
+ * The build fails if the notice is published but still has fields to complete,
+ * or is missing in a language.
+ */
+export async function getLegalPage(lang: Lang): Promise<LegalPage | undefined> {
+  const entries = await getCollection("legal");
+  for (const required of languages) {
+    const entry = entries.find((item) => item.id === required);
+    if (!entry?.data.published) continue;
+    const text = `${JSON.stringify(entry.data)}\n${entry.body ?? ""}`;
+    if (placeholderPattern.test(text)) {
+      throw new Error(
+        `Legal notice "${required}" is published but still has fields to complete.`,
+      );
+    }
+    for (const other of languages) {
+      if (!entries.find((item) => item.id === other)?.data.published) {
+        throw new Error(
+          `Legal notice is published in "${required}" but "${other}.md" is missing or not published.`,
+        );
+      }
+    }
+  }
+  const entry = entries.find((item) => item.id === lang);
+  return entry && (entry.data.published || import.meta.env.DEV)
+    ? entry
+    : undefined;
+}

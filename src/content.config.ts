@@ -73,4 +73,14 @@ const support = defineCollection({
   }),
 });
 
-export const collections = { projects, privacy, support };
+// Legal notice of the site: src/content/legal/fr.md and en.md
+const legal = defineCollection({
+  loader: glob({ pattern: "{fr,en}.md", base: "./src/content/legal" }),
+  schema: z.object({
+    updated: z.coerce.date().optional(),
+    // While false, the page only exists in `npm run dev`.
+    published: z.boolean(),
+  }),
+});
+
+export const collections = { projects, privacy, support, legal };
