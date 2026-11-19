@@ -63,8 +63,22 @@ const support = defineCollection({
   schema: z.object({
     intro: z.string().min(1),
     contactHint: z.string().min(1),
+    // An answer is a paragraph, or a list of blocks: paragraphs and bullet lists.
     faq: z.array(
-      z.object({ question: z.string().min(1), answer: z.string().min(1) }),
+      z.object({
+        question: z.string().min(1),
+        answer: z.union([
+          z.string().min(1),
+          z
+            .array(
+              z.union([
+                z.string().min(1),
+                z.object({ list: z.array(z.string().min(1)).min(1) }),
+              ]),
+            )
+            .min(1),
+        ]),
+      }),
     ),
     compatibility: z.array(z.string().min(1)).default([]),
     note: z.string().min(1).optional(),
