@@ -1,6 +1,6 @@
 ---
 published: true
-updated: 2026-11-13
+updated: 2026-11-19
 summary:
   - Your data stays on your iPhone. I have no server, no accounts, and no access to your journal.
   - No tracking, no advertising, no usage statistics, no third-party SDKs.
@@ -61,11 +61,13 @@ I do not sell, rent or share your data with anyone. The app contains no analytic
 
 ## Retention and deletion
 
-Your data is kept for as long as you keep it in the app. You can delete entries in the app. Uninstalling the app deletes the local data from the device. If you had turned on the iCloud backup, the copy stays in your iCloud until you delete it: iOS Settings › your name › iCloud › Manage Storage › Acalme.
+Your data is kept for as long as you keep it in the app. You can delete entries one by one, or erase everything at once, at any time: Settings › "My data" › "Delete all my data". This is permanent. If the iCloud backup is on, the app also asks for the iCloud copy to be erased. The details of what is erased, and what is not (for example data in the Health app), are on the [support page](/en/projects/acalme/support/).
+
+Uninstalling the app deletes the local data from the device. If you uninstall the app without using this button, the copy in your iCloud stays until you delete it: iOS Settings › your name › iCloud › Manage Storage › Acalme.
 
 ## Your rights
 
-Under the GDPR, you have the right to access, rectify, erase, port, restrict and object to the processing of your data. Since your data is on your device (and in your iCloud if you chose so), you exercise these rights directly by viewing, editing or deleting it. For any question, write to me at [contact@amandinecousin.com](mailto:contact@amandinecousin.com). You can also lodge a complaint with the CNIL, the French data protection authority ([cnil.fr](https://www.cnil.fr)).
+Under the GDPR, you have the right to access, rectify, erase, port, restrict and object to the processing of your data. Since your data is on your device (and in your iCloud if you chose so), you exercise these rights directly by viewing, editing or deleting it. You can erase everything at any time in the app, without asking me (see "Retention and deletion"). For any question, write to me at [contact@amandinecousin.com](mailto:contact@amandinecousin.com). You can also lodge a complaint with the CNIL, the French data protection authority ([cnil.fr](https://www.cnil.fr)).
 
 ## Not a medical device
 

@@ -1,6 +1,6 @@
 ---
 published: true
-updated: 2026-11-13
+updated: 2026-11-19
 summary:
   - Tes données restent sur ton iPhone. Je n'ai aucun serveur, aucun compte, aucun accès à ton journal.
   - Aucun suivi, aucune publicité, aucune statistique d'usage, aucun SDK tiers.
@@ -61,11 +61,13 @@ Je ne vends, ne loue et ne partage tes données avec personne. L'app ne contient
 
 ## Durée de conservation et suppression
 
-Tes données sont conservées tant que tu les gardes dans l'app. Tu peux supprimer des saisies dans l'app. Désinstaller l'app supprime les données locales de l'appareil. Si tu avais activé la sauvegarde iCloud, la copie reste dans ton iCloud jusqu'à ce que tu la supprimes : Réglages iOS › ton nom › iCloud › Gérer le stockage › Acalme.
+Tes données sont conservées tant que tu les gardes dans l'app. Tu peux supprimer des saisies une par une, ou tout effacer d'un coup, à tout moment : Réglages › « Mes données » › « Supprimer toutes mes données ». C'est définitif. Si la sauvegarde iCloud est activée, l'app demande aussi l'effacement de la copie dans iCloud. Le détail de ce qui est effacé, et de ce qui ne l'est pas (par exemple les données de l'app Santé), est dans la [page de support](/fr/projects/acalme/support/).
+
+Désinstaller l'app supprime les données locales de l'appareil. Si tu désinstalles l'app sans avoir utilisé ce bouton, la copie dans ton iCloud reste jusqu'à ce que tu la supprimes : Réglages iOS › ton nom › iCloud › Gérer le stockage › Acalme.
 
 ## Tes droits
 
-Conformément au RGPD, tu disposes d'un droit d'accès, de rectification, d'effacement, de portabilité, de limitation et d'opposition. Comme tes données sont sur ton appareil (et dans ton iCloud si tu l'as choisi), tu les exerces directement en les consultant, les modifiant ou les supprimant. Pour toute question, écris-moi à [contact@amandinecousin.com](mailto:contact@amandinecousin.com). Tu peux aussi saisir la CNIL ([cnil.fr](https://www.cnil.fr)).
+Conformément au RGPD, tu disposes d'un droit d'accès, de rectification, d'effacement, de portabilité, de limitation et d'opposition. Comme tes données sont sur ton appareil (et dans ton iCloud si tu l'as choisi), tu les exerces directement en les consultant, les modifiant ou les supprimant. Tu peux tout effacer à tout moment dans l'app, sans me le demander (voir « Durée de conservation et suppression »). Pour toute question, écris-moi à [contact@amandinecousin.com](mailto:contact@amandinecousin.com). Tu peux aussi saisir la CNIL ([cnil.fr](https://www.cnil.fr)).
 
 ## Ce n'est pas un dispositif médical
 

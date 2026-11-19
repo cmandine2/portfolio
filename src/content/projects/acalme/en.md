@@ -56,4 +56,5 @@ The app helps you observe. It makes no diagnosis and does not replace medical ad
 
 - Swift 6 and SwiftUI, on iPhone, Apple Watch and widgets.
 - Read-only access to Health: the app never writes to Health.
+- Erase all your data in one gesture.
 - Tested against 13 usage profiles (with or without a watch, permissions denied, short or long history…).

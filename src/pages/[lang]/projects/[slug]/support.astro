@@ -85,7 +85,17 @@ const mailto = `mailto:${contactEmail}?subject=${encodeURIComponent(title)}`;
         {faq.map((item, index) => (
           <details open={index === 0}>
             <summary>{item.question}</summary>
-            <p>{item.answer}</p>
+            {[item.answer].flat().map((block) =>
+              typeof block === "string" ? (
+                <p>{block}</p>
+              ) : (
+                <ul>
+                  {block.list.map((line) => (
+                    <li>{line}</li>
+                  ))}
+                </ul>
+              ),
+            )}
           </details>
         ))}
       </div>
@@ -191,9 +201,18 @@ const mailto = `mailto:${contactEmail}?subject=${encodeURIComponent(title)}`;
     content: "–";
   }
 
-  details p {
+  details p,
+  details ul {
     margin-bottom: 18px;
     color: var(--ink-soft);
+  }
+
+  details ul {
+    padding-left: 22px;
+  }
+
+  details li + li {
+    margin-top: 6px;
   }
 
   .small-title {

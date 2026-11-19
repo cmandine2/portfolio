@@ -10,7 +10,20 @@ faq:
   - question: Is my data synced between my devices?
     answer: By default, your journal stays on your iPhone. You can choose to back it up to your iCloud, so you can get it back if you change or lose your phone. The setting is in the app, under Settings › Setup › "Back up to my iCloud", and it applies at the next launch. What you tap on the Apple Watch is sent to your iPhone.
   - question: How do I delete all my data?
-    answer: You can delete your entries in the app. Uninstalling the app deletes the data stored on the device. If you had turned on the iCloud backup, also delete the copy in iOS Settings › your name › iCloud › Manage Storage › Acalme.
+    answer:
+      - 'In the app, open Settings › "My data" section › "Delete all my data", then confirm with "Delete everything". This is permanent.'
+      - "What is erased:"
+      - list:
+          - "your journal: urges to move, times out of bed, factors (including the ones you created), naps, treatments, notes and severity tests;"
+          - "your settings and profile: first and last name, tracking mode, iCloud choice, and the written summaries kept in memory;"
+          - "the data shown in the widgets and the temporary PDF file of the sleep diary."
+      - "Then the app starts again as it did the first time you opened it. If the iCloud backup is on, the app also asks iCloud to erase it and waits for it to finish (20 seconds at most): the copy of your journal in iCloud is deleted too."
+      - "What is not erased:"
+      - list:
+          - "data in the Health app: Acalme only reads it and never changes it, and it does not belong to the app. To manage it, use Apple's Health app;"
+          - "an iCloud copy left behind by a backup you turned off in the meantime: the app cannot erase it. Delete it in iOS Settings › your name › iCloud › Manage Storage › Acalme;"
+          - "a sleep diary PDF you already shared or saved elsewhere (Files, email, your doctor): the app can no longer reach it;"
+          - "the Apple Watch: if your watch has markers not yet sent to your iPhone, it may keep them for a while."
 compatibility:
   - iPhone · iOS 18 or later
   - Apple Watch · watchOS 10.6 or later (optional)
