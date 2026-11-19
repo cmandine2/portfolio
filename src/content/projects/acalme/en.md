@@ -57,4 +57,4 @@ The app helps you observe. It makes no diagnosis and does not replace medical ad
 - Swift 6 and SwiftUI, on iPhone, Apple Watch and widgets.
 - Read-only access to Health: the app never writes to Health.
 - The on-device AI built into iOS (Apple Intelligence) writes the analyses: no third-party service, and no data sent outside the device to produce them.
-- Tested against 13 usage profiles (with or without a watch, permissions denied, short or long history…).
+- Tested against a range of usage profiles (with or without a watch, permissions denied, short or long history…).
